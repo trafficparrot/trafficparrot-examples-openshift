@@ -10,7 +10,7 @@ There are a number of ways you can do this, for example:
 
 ## Install required tools
 1. You will need the `oc` [client tool](https://www.okd.io/download.html#oc-platforms) to issue commands to the cluster
-1. If using Minishift or OpenShift Online you will need [Docker](https://docs.docker.com/install/#supported-platforms) to be able to build and push custom Docker images to the registry.
+1. You will need [Docker](https://docs.docker.com/install/#supported-platforms) to be able to build and push custom Docker images to the registry
 
 ## Log in to the OpenShift cluster
 
