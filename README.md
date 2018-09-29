@@ -62,8 +62,8 @@ docker login -u developer -p $(oc whoami -t) ${CLUSTER_REGISTRY}
 We build the image locally and tag it ready to be used in the cluster registry.
 
 Note that you must set build arguments:
-1. `TRAFFIC_PARROT_ZIP` - This can be a HTTP location or a local file location. You can [download a trial copy](https://trafficparrot.com/download.html?src=trafficparrot-examples-openshift).
-1. `ACCEPT_LICENSE` - Set this to `true` to indicate that you accept the terms of the [LICENSE](LICENSE)
+1. `TRAFFIC_PARROT_ZIP` is a HTTP location or a local file location. You can [download a trial copy](https://trafficparrot.com/download.html?src=trafficparrot-examples-openshift).
+1. `ACCEPT_LICENSE` should be set to `true` if you accept the terms of the [LICENSE](LICENSE)
 
 ```
 docker build \
