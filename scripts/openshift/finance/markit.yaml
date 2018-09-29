@@ -1,0 +1,32 @@
+openapi: "3.0.1"
+
+paths:
+  /MODApis/Api/v2/Quote/json:
+    get:
+      parameters:
+      - in: query
+        name: symbol
+        schema:
+          type: string
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quote"
+              examples:
+                "Apple Stock Price":
+                  value:
+                    "Symbol": "AAPL"
+                    "LastPrice": 225.74
+
+components:
+  schemas:
+    Quote:
+      type: "object"
+      properties:
+        Symbol:
+          type: "string"
+        LastPrice:
+          type: "number"

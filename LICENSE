@@ -1,0 +1,194 @@
+TRAFFIC PARROT – ENTERPRISE SOFTWARE LICENCE TERMS
+1.1.1 Definitions and interpretation
+1.2 Words shall have the meanings given to them in this Agreement, including without limitation as set out below.
+Confidential Information
+1 means any and all confidential information (whether in oral, written or electronic form) given including technical or other information imparted in confidence or disclosed by one party to the other or otherwise obtained by one party relating to the other’s business, finance or technology, know-how, intellectual property, assets, strategy, products and customers, including without limitation information relating to manufacturing or other processes, management, financial, marketing, technical and other arrangements or operations of any associate, person, firm, or organisation associated with that party;
+Commencement Date
+2 is the date specified as such in the Order Form;
+Customer
+3 means the Customer as identified as such in the Order Form;
+Documentation
+4 means the data specifying the functionality of the Software in this folder.
+Download URL
+5 means the url specified as such in the Order Form
+Force Majeure
+6 means an event or sequence of events beyond a party’s reasonable control (which could not reasonably have been anticipated and avoided by a party) preventing or delaying it from performing its obligations hereunder, including without limitation war, revolution, terrorism, riot or civil commotion, or precautions against any such; strikes, lock outs or other industrial action, whether of the affected party’s own employees or others; blockage or embargo; acts of or restrictions imposed by government or public authority; explosion, fire, corrosion, flood, natural disaster, or adverse weather conditions. Force Majeure does not include, without limitation, inability to pay, mechanical difficulties, shortage or increase of price of raw materials, over-commitment or market or other circumstances which may make the terms of this Agreement unattractive to a party;
+Initial Terms
+7 means the period specified as such in the Order Form;
+Intellectual Property Rights or IPRS
+8 means any and all copyright, rights in inventions, patents, know-how, trade secrets, trade marks and trade names, service marks, design rights, rights in get-up, database rights and rights in data, semiconductor chip topography rights, utility models, domain names and all similar rights and, in each case:
+(a) whether registered or not,
+(b) including any applications to protect or register such rights,
+(c) including all renewals and extensions of such rights or applications,
+(d) whether vested, contingent or future and
+(e) wherever existing;
+Licence Fee
+9 means the licence fee set out in the Order Form;
+Maintenance Release
+10 means a release of the Software that corrects faults, adds functionality or otherwise amends or upgrades the Software, but which does not constitute a New Product;
+
+New Product
+11 any new version of the Software which from time to time is publicly marketed and offered for purchase by Traffic Parrot, being a version which contains such significant differences from the previous versions as to be generally accepted in the marketplace as constituting a new product;
+Open Source Software
+12 means any open source software or libraries or code licensed from time to time under any form of open source licence, including the General Public Licence (as described by the Free Software Foundation and set out at http://www.opensource.org/docs/definition.php);
+Order Form
+13 means the form completed by the Customer accepting these terms.
+Software
+14 means the software licensed under this Agreement as identified as ‘the Software’ in Error: Reference source not found (Software) and including the Documentation (in whatever media) supplied with it;
+Traffic Parrot
+15 is the company identified as such on the Order Form;
+VAT
+16 means United Kingdom value added tax and any other tax imposed in substitution for it and any equivalent or similar tax imposed outside the United Kingdom;
+
+1.3 Interpretation
+In this Agreement, unless the context otherwise requires:
+1.3.1 the singular includes the plural and vice versa;
+1.3.2 references to subclauses, clauses, Schedules (if any) are to subclauses, clauses, Schedules of this Agreement;
+1.3.3 references to persons include individuals, trusts, partnerships, unincorporated bodies, government entities, companies and/or corporations (in each case whether or not having separate legal personality);
+1.3.4 'including’ (or similar words) means including without limitation;
+1.3.5 clause headings do not affect their interpretation.
+1.3.6 Duration
+1.4 This Agreement shall continue from the Commencement Date. Unless terminated earlier in accordance with clause 1.46.1 or this clause, this agreement shall continue for the Initial Term and shall automatically extend for a further period of the same duration (Extended Term) at the end of the Initial Term and at the end of each Extended Term. Either party may give written notice to the other party, not later than 30 days before the end of the Initial Term or the relevant Extended Term, to terminate this agreement at the end of the Initial Term or the relevant Extended Term, as the case may be.
+1.4.1 Software
+1.5 Traffic Parrot agrees to provide the Software to Customer in accordance with this Agreement.
+1.6 Traffic Parrot will provide the Customer with all Maintenance Releases generally made available to its customers.  No Maintenance Release will adversely affect the then existing facilities or functions of the Software. The Customer shall install all Maintenance Releases as soon as reasonably practicable after receipt.
+1.7 The Software shall include any updates, upgrades, new releases or versions of the Software made generally commercially available by it.
+1.7.1 Grant of licence
+1.8 Traffic Parrot grants Customer  a licence to use the Software in object code form subject to the following licence conditions:
+1.8.1 Exclusivity: the licence is non-exclusive;
+1.8.2 Transferability: the licence is non-transferable. The licence cannot be sublicensed;
+1.8.3 Purpose: the Software may only be used in connection with  Customer’s own internal business purposes and subject to other restrictions on use in clause 1.11.1 (Use of Software) below;
+1.8.4 Location: the licence only relates to the use of the Software at the Customer’s address specified above.
+1.8.5 Supply obligations
+1.9 Traffic Parrot shall make available for download by Customer one copy of the Software in object code format, from the Download URL on the Commencement Date or as soon thereafter as is reasonably practicable.
+1.10 Where payment of any part of the Licence Fee is due before delivery of the Software, Traffic Parrot may withhold delivery until such payment has been received.
+1.11 Unless otherwise agreed, Customer is responsible for installation of the Software and any updates, upgrades, new releases or new versions subsequently received (if any).
+1.11.1 Use of the Software
+1.12 For the purposes of clause 1.8, "use of the Software" means loading the Software into temporary memory or permanent storage on a computer under the custody and control of Customer.
+1.13 The Customer may not use the Software other than as specified in clause 1.8 without the prior written consent of Traffic Parrot, and the Customer acknowledges that additional fees may be payable on any change of use approved by Traffic Parrot.
+1.14 Customer shall not use the Software contrary to any restriction stated in this Agreement, or otherwise in a way that is not expressly permitted by this Agreement.
+1.15 Except to the extent such activities are permitted by applicable English law or are expressly agreed by the parties to this Agreement, Customer's rights to use the Software does not permit it to:
+1.15.1 distribute, license, sell or otherwise deal in or encumber the Software;
+1.15.2 translate, adapt, disassemble, reverse engineer or decompile the Software (or any part of it), nor make any modifications, additions or enhancements to it;
+1.15.3 combine, merge or otherwise permit the Software (or any part of it) to become incorporated in any other program, nor arrange or create derivative works based on it;
+1.15.4 copy the Software (or any part of it), except for such back-ups as are reasonably necessary, provided that Customer keeps accurate and up-to-date records of such copying containing such information as Traffic Parrot reasonable requests;
+1.15.5 use the Software on behalf of or make it available to any third party or allow or permit a third party to do so.
+1.16 Customer's rights to use the Software do not include the rights of Customer's associates or any third party to use or have access to the Software , and in any event Customer shall ensure that all such use:
+1.16.1 does not exceed Customer's use as permitted under this Agreement;
+1.16.2 is controlled by Customer or its agents; and
+1.16.3 is otherwise subject to and in accordance with the terms of this Agreement.
+1.16.4 Fees
+1.17 Customer shall pay Traffic Parrot the Licence Fee (plus any applicable VAT) for the licence to use the Software under this Agreement. The Licence Fee shall be payable within 30 days of Traffic Parrot’s invoice, which shall be issued on the Commencement Date and (in the event of a renewal) at the start of each Extended Term.
+1.18 Traffic Parrot shall invoice Customer electronically to the email address notified by Customer in writing to Traffic Parrot for all sums due under this Agreement.
+1.19 Customer shall pay such sums in full without set-off or counterclaim.
+1.19.1 Taxes and duties
+1.20 All amounts due under this Agreement are exclusive of VAT, sales or other tax applicable which shall be paid in addition by Customer at the rate and in the manner for the time being prescribed by law.
+1.20.1 Interest
+1.21 Where sums due hereunder are not paid in full by the due date, Traffic Parrot may, without limiting its other rights, charge interest on such sums at 3% a year above the base rate of Barclays Bank from time to time in force.
+1.22 Interest will apply from the due date for payment until actual payment in full, whether before or after judgment.
+1.22.1 Payment Means
+1.23 Amounts payable to Traffic Parrot under this Agreement shall be paid by means of an online payment system specified by Traffic Parrot, or into a bank account specified by Traffic Parrot by electronic funds transfer in writing from time to time.
+1.23.1 Limits on liability
+1.24 Subject to the following subclauses in this clause 1.23.1, in no event shall the aggregate liability of any party to the other (whether in contract, tort (including negligence) or otherwise) and in respect of all claims, losses and damages arising under or in connection with this Agreement exceed 100% of the total amounts paid under this Agreement in the 12 months prior to the event giving rise to such liability.
+1.25 Each party's liability to the other in contract, tort (including negligence), misrepresentation (whether innocent or negligent), breach of statutory duty or otherwise arising out of or in connection with this Agreement shall not extend to any of the following:
+1.25.1  loss of profits,
+1.25.2 loss of anticipated savings,
+1.25.3 loss of goodwill;
+1.25.4 loss of data;
+1.25.5 any special, indirect or consequential loss or damage whatsoever, even if Traffic Parrot was aware of the circumstances in which such special damage could arise.
+1.26 The parties agree that the limitations on liability in this Agreement are reasonable given their respective commercial positions and ability to purchase relevant insurance in respect of risks under this Agreement.
+1.27 Notwithstanding the above or other limitations and exclusions of liability set out in this Agreement, neither party excludes or limits any liability for:
+1.27.1 personal injury (including sickness and death) to the extent that such injury results from the negligence or wilful default of a party or its employees; or
+1.27.2 fraud or fraudulent misrepresentation; or
+1.27.3 any breach of any obligations implied by section 12 of the Sale of Goods Act 1979 or section 2 of the Supply of Goods and Services Act 1982;
+1.27.4 any breach of clause 1.1.1 (Confidential Information); or
+1.27.5 any other liability to the extent the same cannot be excluded or limited by law.
+1.27.6 Warranties
+1.28 Traffic Parrot warrants and represents to Customer that:
+1.28.1 Traffic Parrot has the right, power and authority to enter into this Agreement;
+1.28.2 It shall employ industry-standard malware checking techniques with a view to ensuring that the Software is free from viruses and other malicious code when supplied; and
+1.28.3 to the best of Traffic Parrot’s reasonable knowledge, the Software does not infringe the Intellectual Property Rights of any third party;
+1.28.4 the Software does not contain any Open Source Software other than that specified in Error: Reference source not found (Software); and
+1.28.5 for the period of 60 days after the delivery of the Software:
+(a) the Software (except for the Open Source Software) will conform and perform according to the Documentation in all material respects, when used in accordance with this Agreement and in the manner directed or recommended by Traffic Parrot in writing; and
+(b) the Documentation will provide users with adequate instructions to enable them to effectively use the Software.
+1.29 The warranties and representations specified in clause 1.28 are subject to Customer giving notice to Traffic Parrot as soon as it is reasonably able upon becoming aware of the breach but in the case of a warranty or representation as to conformance and performance according to the Documentation, such notice must be in writing and given within the warranty period in clause 1.28.5.
+1.30 When notifying Traffic Parrot of a breach Customer shall use its reasonable endeavours to provide Traffic Parrot with such documented information, details and assistance as Traffic Parrot may reasonably request.
+1.31 Traffic Parrot does not warrant or represent that the Software shall be uninterrupted or error free, or compatible with third party software or equipment, other than that described in the Documentation.
+1.32 All other warranties and representations as to the Software, whether statutory or implied, are hereby expressly excluded to the fullest extent permitted by law.
+1.33 Customer acknowledges that:
+1.33.1 Traffic Parrot is not and cannot be aware of the extent of any potential loss or damage to Customer resulting from any failure of the Software to conform to the Documentation or any failure by Traffic Parrot to discharge its obligations under this Agreement;
+1.33.2 the Software has not been prepared to meet Customer’s individual requirements and that it cannot be tested in every operating environment so as to produce software which is error free or operates without interruption;
+1.33.3 any Open-Source Software comprised in the Software is provided "as is" and expressly subject to the disclaimer in clause 1.32 above; and
+1.33.4 it is Customer’s responsibility to ensure the facilities and functions of the Software described in the Documentation meet Customer’s requirements.
+1.34 Any warranties given by Traffic Parrot shall be subject to Customer using the Software in compliance with this Agreement and the Documentation, and Traffic Parrot shall not be liable under this clause for, or required to remedy, any problem arising from:
+1.34.1 Customer’s failure to install any update, fix or improvement previously provided to it by Traffic Parrot;
+1.34.2 any modification made to any part of the Software by anyone other than Traffic Parrot without its express prior written consent; or
+1.34.3 any defect or error wholly caused by any equipment or third party software used in connection with the Software, other than that described in the Documentation
+1.35 Traffic Parrot undertakes to use all reasonable endeavours to remedy any fault arising from a breach of clause 1.28 within 7 days  after notification. If Traffic Parrot rectifies such fault within such time then it will have no other liability of any kind in respect of the fault. Such remedy shall be free of charge to Customer unless the fault is found not to arise from a breach of clause 1.28, at which point Customer shall pay all reasonable and demonstrable costs and expenses associated with the fault incurred by Traffic Parrot.  Customer acknowledges that support for the Software is limited to remote (phone and email) support and in no circumstances will Traffic Parrot be obliged to provide any support by other means (including attendance at the Customer’s premises).
+1.35.1 Intellectual Property Rights
+1.36 Except for Customer's licence right to use the Software as expressly granted above, Customer shall not acquire in any way, any title, rights of ownership, or Intellectual Property Rights of whatever nature in the Software or in any copies of it and no Intellectual Property Rights of either party are transferred or licensed as a result of this Agreement.
+1.37 Customer acknowledges and understands that the Software contains confidential and proprietary information and it shall not conceal, modify, remove, destroy or alter in any way any proprietary markings of Traffic Parrot on or in the Software or any related materials and documentation.
+1.37.1 Intellectual Property Rights indemnity
+1.38 Traffic Parrot shall indemnify and keep indemnified and hold harmless Customer from and against any losses, damages, liability, costs (including reasonable legal fees) and expenses incurred by Customer as a result of or in connection with any action, demand or claim that use or possession of the Software, infringes the Intellectual Property Rights of any third party ('Traffic Parrot IPR Claim'), provided that Traffic Parrot shall have no such liability if Customer:
+1.38.1 does not notify Traffic Parrot in writing setting out full details of any Traffic Parrot IPR Claim of which it has notice as soon as is reasonably possible;
+1.38.2 makes any admission of liability or agrees any settlement or compromise of the relevant Traffic Parrot IPR Claim without the prior written consent of Traffic Parrot (which shall not be unreasonably withheld or delayed);
+1.38.3 does not let Traffic Parrot at its request and own expense have the conduct of or settle all negotiations and litigation arising from Traffic Parrot IPR Claim; or
+1.38.4 does not, at Traffic Parrot’s request and own expense, give Traffic Parrot all reasonable assistance in the circumstances described above.
+1.39 Subject to clause 1.40 below, if any Traffic Parrot IPR Claim is made or is reasonably likely to be made against Customer, Traffic Parrot shall promptly and at its own expense either:
+1.39.1 procure for Customer the right to continue using and possessing the Software; or
+1.39.2 modify or replace the infringing part of the Software and without adversely affecting the functionality of the Software as set out in this Agreement so as to avoid the infringement or alleged infringement, provided that
+1.40 If Traffic Parrot, having used its reasonable endeavours, cannot accomplish either of the outcomes specified in 1.39.1 and 1.39.2 on reasonable terms, Traffic Parrot shall (without prejudice to the indemnity above) refund the Licence Fees paid by Customer in respect of the Software. Apart from the indemnity given by Traffic Parrot above, this shall be Customer’s sole remedy in respect of the Software infringing Intellectual Property Rights.
+1.40.1 Mitigation
+1.41 In respect of any indemnity given by either party under this Agreement, the party which receives the benefit of the indemnity shall take all reasonable steps so as to reduce or mitigate the loss covered by the indemnity.
+1.41.1 Entire agreement
+1.42 This licence, the schedules and the documents referred to in this Agreement contain the whole agreement between the parties relating to the subject matter hereof and supersede all prior agreements, arrangements and understandings between the parties relating to that subject matter.
+1.43 Each party acknowledges that, in entering into this Agreement, it does not rely on any statement, representation, assurance or warranty (whether it was made negligently or innocently) of any person (whether a party to this licence or not) other than as expressly set out or incorporated by reference in this Agreement.
+1.44 Nothing in this clause shall limit or exclude any liability for fraud.
+1.44.1 Force Majeure
+1.45 A party will not be liable if delayed in or prevented from performing its obligations hereunder due to Force Majeure.
+1.46 If, due to Force Majeure, a party is unable to perform a material obligation, or is delayed in or prevented from performing its obligations for a continuous period of more than 90 days, the other party may, within a further 14 days terminate this Agreement on notice, otherwise this Agreement shall continue in full force and effect.
+1.46.1 Termination
+1.47 Either party may, without prejudice to its other rights and remedies, by notice in writing to the other party immediately terminate this Agreement if the other:
+1.47.1 fails to pay any sum payable and due under this Agreement, including the Licence Fee;
+1.47.2 is in material or persistent breach of any of its obligations under this Agreement and if that breach is capable of remedy and the other has failed to remedy that breach within 30 days after receiving written notice requiring it to remedy that breach; or
+1.47.3 is unable to pay its debts (within the meaning of section 123 of the Insolvency Act 1986) or becomes insolvent or an order is made or a resolution passed for the administration, winding-up or dissolution of the other (otherwise than for the purposes of a solvent amalgamation or reconstruction) or an administrative or other receiver, manager, liquidator, administrator, trustee or similar officer is appointed over all or any substantial part of the assets of the other or the other enters into or proposes any composition or arrangement with its creditors generally or any analogous event occurs in any applicable jurisdiction.
+1.48 Customer may without prejudice to its other rights and remedies by notice in writing to Traffic Parrot immediately terminate this Agreement if Traffic Parrot ceases or threatens to cease carrying on business.
+1.49 In the event of termination of this Agreement for any reason, each party shall within seven days return or destroy (at the other party's option) all the other party's Confidential Information in its possession or under its control and all copies of such information.
+1.49.1 Notices
+1.1 Notices under this Agreement must be in writing and sent to the other party's registered office (or such other applicable address for service agreed by the parties from time to time in writing). Notices may be given, and will be deemed received if correctly addressed by e-mail to the address on the Order Form, or such other email address as may be notified to the other party from time to time from the email address specified in the Order Form.
+1.1.1 Confidential Information
+1.2 Each party shall maintain the confidentiality of the other party's Confidential Information and shall not without the prior written consent of the other use, disclose, copy or modify the other party's Confidential Information (or permit others to do so) other than as necessary for the performance of its rights and obligations under this Agreement.
+1.3 Each party undertakes to:
+1.3.1 disclose the other party's Confidential Information only to those of its officers, employees, agents and contractors (including Traffic Parrot personnel) to whom and to the extent to which such disclosure is necessary for the purposes contemplated under this Agreement, and
+1.3.2 to procure that such persons are made aware of and agree in writing to observe the obligations in this clause
+1.4 Each party shall give notice to the other of any unauthorised misuse, disclosure, theft or loss of the other party's Confidential Information immediately upon becoming aware of the same.
+1.5 The provisions of this clause shall not apply to information which:
+1.5.1 is or comes into the public domain through no fault of the recipient, its officers, employees, agents or contractors
+1.5.2 is lawfully received by the recipient from a third party free of any obligation of confidence at the time of its disclosure
+1.5.3 is independently developed by the recipient, without access to or use of such information, or
+1.5.4 is required by law, by court or governmental or regulatory order to be disclosed provided that the relevant party, where possible, notifies the other party at the earliest opportunity before making any disclosure
+1.6 The obligations under this clause shall survive the variation, expiry or termination of this Agreement for a period of five years thereafter.
+1.7 Each party (the Indemnifier) shall indemnify and keep indemnified and hold harmless the other (the Indemnitee) from and against any losses, damages, liability, costs (including legal fees) and expenses incurred by the Indemnitee arising from or in connection with any breach by the Indemnifier of this clause.
+1.7.1 General
+1.8 Except for the payments specifically agreed in this Agreement, each party is responsible for its legal and other costs in relation to the preparation and performance of this Agreement.
+1.9 Provisions which by their terms or intent are to survive termination of this Agreement will do so.
+1.10 The parties are independent businesses and not partners, principal and agent, or employer and employee, or in any other relationship of trust to each other.
+1.11 For the purposes of the Contracts (Rights of Third Parties) Act 1999, this Agreement is not intended to and does not give any person who is not a party to it any right to enforce any of its provisions. However, this does not affect any rights or remedy of such a person that exists or is available apart from that Act.
+1.12 Either party may at any time assign, mortgage, charge, declare a trust over or deal in any other manner with any or all of its rights under this agreement, provided that it gives written notice of such dealing to the other party.
+1.13 No amendment or variation of this Agreement will be valid unless agreed in writing by an authorised signatory of each party.
+1.14 If any clause in this Agreement (or part thereof) is or becomes illegal, invalid or unenforceable under applicable law, but would be legal, valid and enforceable if the clause or some part of it was deleted or modified (or the duration of the relevant clause reduced), the relevant clause (or part thereof) will apply with such deletion or modification as may be required to make it legal, valid and enforceable, and the parties will promptly and in good faith seek to negotiate a replacement provision consistent with the original intent of this Agreement as soon as possible.
+1.15 The amounts due under this Agreement shall not change except as mutually agreed by the parties.
+1.16 Each party will, at its own cost, do all further acts and execute all further documents necessary to give effect to this Agreement.
+1.17 No failure or delay by a party to exercise any right or remedy provided under this agreement or by law shall constitute a waiver of that or any other right or remedy, nor shall it prevent or restrict the further exercise of that or any other right or remedy. No single or partial exercise of such right or remedy shall prevent or restrict the further exercise of that or any other right or remedy
+1.17.1 Counterparts
+1.18 This Agreement may be signed in any number of counterparts and by the parties on separate counterparts, each of which when signed and dated shall be an original, and such counterparts taken together shall constitute one and the same agreement. This Agreement shall not be effective until each party has signed one counterpart.
+1.18.1 Governing law and jurisdiction
+1.19 This Agreement is governed by the law of England and Wales. All disputes under this Agreement shall be subject to the exclusive jurisdiction of the courts of England and Wales.
+1.19.1 Open Source Software
+1.20 The Software comprises various open source software items licensed by Traffic Parrot under the following licences:
+1.20.1 Apache License v2.0
+1.20.2 JSON.org license
+1.20.3 Eclipse Public License v1.0
+1.20.4 MIT License
+1.20.5 CDDL License v1.0

@@ -1,0 +1,237 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "annotations": {
+      "description": "Application template for Traffic Parrot demo finance application"
+    }
+  },
+  "parameters": [
+    {
+      "description": "The name for the application.",
+      "name": "APPLICATION_NAME",
+      "required": true
+    },
+    {
+      "description": "Git source URI for application",
+      "name": "GIT_URI",
+      "value": "https://github.com/wojciechbulaty/examples"
+    },
+    {
+      "description": "Git branch/tag reference",
+      "name": "GIT_REF",
+      "value": "master"
+    },
+    {
+      "description": "Github trigger secret",
+      "name": "GITHUB_TRIGGER_SECRET",
+      "from": "[a-zA-Z0-9]{8}",
+      "generate": "expression"
+    },
+    {
+      "description": "Generic build trigger secret",
+      "name": "GENERIC_TRIGGER_SECRET",
+      "from": "[a-zA-Z0-9]{8}",
+      "generate": "expression"
+    }
+  ],
+  "objects": [
+    {
+      "kind": "BuildConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "triggers": [
+          {
+            "type": "Generic",
+            "generic": {
+              "secret": "${GENERIC_TRIGGER_SECRET}"
+            }
+          },
+          {
+            "type": "GitHub",
+            "github": {
+              "secret": "${GITHUB_TRIGGER_SECRET}"
+            }
+          },
+          {
+            "type": "ImageChange",
+            "imageChange": {}
+          }
+        ],
+        "source": {
+          "type": "Git",
+          "git": {
+            "uri": "${GIT_URI}",
+            "ref": "${GIT_REF}"
+          },
+          "contextDir": "finance-application"
+        },
+        "strategy": {
+          "type": "Source",
+          "sourceStrategy": {
+            "from": {
+              "kind": "ImageStreamTag",
+              "namespace": "trafficparrot-test",
+              "name": "redhat-openjdk18-openshift:latest"
+            },
+            "env": [
+              {
+                "name": "JAVA_MAIN_CLASS",
+                "value": "com.wbsoftwareconsutlancy.FinanceApplication"
+              }
+            ]
+          }
+        },
+        "output": {
+          "to": {
+            "kind": "ImageStreamTag",
+            "name": "${APPLICATION_NAME}:latest"
+          }
+        }
+      }
+    },
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "tags": [
+          {
+            "name": "latest"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "labels": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Recreate"
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${APPLICATION_NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "name": "${APPLICATION_NAME}:latest"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        },
+        "template": {
+          "metadata": {
+            "labels": {
+              "deploymentConfig": "${APPLICATION_NAME}"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "${APPLICATION_NAME}",
+                "image": "${APPLICATION_NAME}",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 8282,
+                    "protocol": "TCP"
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "name": "config-volume",
+                    "mountPath": "/app/config"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "finance.application.properties",
+                    "value": "/app/config/finance-application.properties"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always",
+                "securityContext": {
+                  "capabilities": {},
+                  "privileged": false
+                }
+              }
+            ],
+            "volumes": [
+              {
+                "name": "config-volume",
+                "configMap": {
+                  "name": "${APPLICATION_NAME}-config"
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "annotations": {
+          "description": "Route for application's http service"
+        }
+      },
+      "spec": {
+        "to": {
+          "kind": "Service",
+          "name": "${APPLICATION_NAME}"
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}",
+        "annotations": {
+          "description": "The web server's http port"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 8282,
+            "targetPort": 8282
+          }
+        ],
+        "selector": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      }
+    }
+  ]
+}
