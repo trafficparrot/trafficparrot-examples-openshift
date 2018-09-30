@@ -55,8 +55,11 @@ pipeline {
                             openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
-                            openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
-                                return (it.object().status.containerStatuses[0].ready == true)
+                            def latestDeploymentVersion = openshift.selector('dc',"${trafficParrotId}").object().status.latestVersion
+                            def rc = openshift.selector('rc', "${trafficParrotId}-${latestDeploymentVersion}")
+                            rc.untilEach(1){
+                                def rcMap = it.object()
+                                return (rcMap.status.replicas.equals(rcMap.status.readyReplicas))
                             }
                             echo "Deployed ${trafficParrotId}!"
                         }
@@ -97,8 +100,11 @@ pipeline {
                             openshift.newApp("openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
 
                             echo "Waiting on deploy for: ${demoId}"
-                            openshift.selector("dc", demoId).related('pods').untilEach(1) {
-                                return (it.object().status.containerStatuses[0].ready == true)
+                            def latestDeploymentVersion = openshift.selector('dc',"${demoId}").object().status.latestVersion
+                            def rc = openshift.selector('rc', "${demoId}-${latestDeploymentVersion}")
+                            rc.untilEach(1){
+                                def rcMap = it.object()
+                                return (rcMap.status.replicas.equals(rcMap.status.readyReplicas))
                             }
                             echo "Deployed ${demoId}!"
                         }
