@@ -114,7 +114,7 @@ The pipeline will:
 To preview the demo, click on the finance route:
 
 ![Alt text](images/openshift-routes.png?raw=true "Finance Route")
-git
+
 You should see this:
 
 ![Alt text](images/openshift-finance-app.png?raw=true "Finance App")
