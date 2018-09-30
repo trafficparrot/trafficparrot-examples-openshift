@@ -130,6 +130,19 @@ You can push the pipeline forwards by clicking on ![Alt text](images/openshift-p
 
 ![Alt text](images/jenkins-pipeline-input.png?raw=true "Jenkins Input")
 
+### What just happened?
+Behind the scenes, we just demonstrated that the demo finance application was able to communicate with Traffic Parrot inside the cluster.
+
+Traffic Parrot was configured by importing an OpenAPI definition [markit.yaml](openshift/finance/markit.yaml) using the [HTTP Management API](https://trafficparrot.com/documentation/4.1.x/openapi/index.html).
+
+Have a look at the configuration files in this project to see how it is done. The key files are:
+* [finance/pipeline.yaml](finance/pipeline.yaml) is the pipeline `BuildConfig`
+* [finance/jenkinsfile.groovy](finance/jenkinsfile.groovy) is the Jenkins pipeline configuration
+* [finance/build.json](finance/build.json) is the `BuildConfig` used to build the [finance application](https://github.com/wojciechbulaty/examples/tree/master/finance-application)
+* [finance/deploy.json](finance/deploy.json) is the `Template` used to deploy the finance application
+* [trafficparrot/Dockerfile](trafficparrot/Dockerfile) is the `Dockerfile` used to build the Traffic Parrot image
+* [trafficparrot/deploy.json](trafficparrot/deploy.json) is the `Template` used to deploy Traffic Parrot
+
 ### Clean up
 To clean up the pipeline:
 ```
