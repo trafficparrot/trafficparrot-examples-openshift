@@ -73,14 +73,20 @@
                   }
                 ],
                 "livenessProbe": {
-                  "tcpSocket": {
-                    "port": 18083,
+                  "exec": {
+                    "command": [
+                      "cat",
+                      "virtualservice.started"
+                    ],
                     "initialDelaySeconds": 5
                   }
                 },
                 "readinessProbe": {
-                  "tcpSocket": {
-                    "port": 18083,
+                  "exec": {
+                    "command": [
+                      "cat",
+                      "virtualservice.started"
+                    ],
                     "initialDelaySeconds": 5
                   }
                 },
