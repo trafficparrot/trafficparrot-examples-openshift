@@ -3,6 +3,7 @@ import java.util.Random;
 // path of the template to use
 // name of the template that will be created
 def demoId = "finance-" + (10000 + new Random().nextInt(10000))
+def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
 
 // TODO:
 //1. mount TP config
@@ -32,6 +33,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Using project: ${openshift.project()}"
+                            echo "Using demo id: ${demoId}"
                         }
                     }
                 }
@@ -42,8 +44,8 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            // create a new application from the templatePath
-                            openshift.newApp("scripts/openshift/finance/build.json", "--name=" + demoId, "--param=APPLICATION_NAME=" + demoId)
+                            echo "Start build for: ${demoId}"
+                            openshift.newApp("scripts/openshift/finance/build.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
                         }
                     }
                 } // script
@@ -54,29 +56,33 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
+                            echo "Waiting for build ${demoId} to finish..."
                             def builds = openshift.selector("bc", demoId).related('builds')
                             builds.untilEach(1) {
                                 return (it.object().status.phase == "Complete")
+                            }
+                            echo "${demoId} has been built!"
+                        }
+                    }
+                } // script
+            } // steps
+        } // stage
+        stage('deploy-trafficparrot') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            echo "Start deploy for: ${trafficParrotId}"
+                            openshift.newApp("scripts/openshift/finance/build.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
+                            openshift.selector("dc", trafficParrotId).rollout();
+                            openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
+                                return (it.object().status.phase == "Running")
                             }
                         }
                     }
                 } // script
             } // steps
         } // stage
-//        stage('deploy') {
-//            steps {
-//                script {
-//                    openshift.withCluster() {
-//                        openshift.withProject() {
-//                            def rm = openshift.selector("dc", demoId).rollout()
-//                            openshift.selector("dc", demoId).related('pods').untilEach(1) {
-//                                return (it.object().status.phase == "Running")
-//                            }
-//                        }
-//                    }
-//                } // script
-//            } // steps
-//        } // stage
 //        stage('tag') {
 //            steps {
 //                script {
@@ -97,11 +103,14 @@ pipeline {
             script {
                 openshift.withCluster() {
                     openshift.withProject() {
-                        // delete everything with this template label
                         openshift.selector("all", [ "app" : demoId ]).delete()
-                        // delete any secrets with this template label
                         if (openshift.selector("secrets", demoId).exists()) {
                             openshift.selector("secrets", demoId).delete()
+                        }
+
+                        openshift.selector("all", [ "app" : trafficParrotId ]).delete()
+                        if (openshift.selector("secrets", trafficParrotId).exists()) {
+                            openshift.selector("secrets", trafficParrotId).delete()
                         }
                     }
                 }
