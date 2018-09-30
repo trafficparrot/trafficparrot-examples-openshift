@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.Random
 
 def demoId = "finance-" + (10000 + new Random().nextInt(10000))
 def demoConfigId = "${demoId}-config"
@@ -58,9 +58,9 @@ pipeline {
                             echo "${demoId} has been built!"
                         }
                     }
-                } // script
-            } // steps
-        } // stage
+                }
+            }
+        }
         stage('deploy-trafficparrot') {
             steps {
                 script {
@@ -79,9 +79,24 @@ pipeline {
                             echo "Deployed ${trafficParrotId}!"
                         }
                     }
-                } // script
-            } // steps
-        } // stage
+                }
+            } 
+        }
+        stage('import-openapi') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
+                            sh "curl -F 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings"
+
+                            def httpRoute = openshift.selector("route", "${trafficParrotId}-http").object().spec.host;
+                            sh "curl -v http://${httpRoute}/MODApis/Api/v2/Quote/json"
+                        }
+                    }
+                }
+            }
+        }
         stage('deploy-demo') {
             steps {
                 script {
@@ -100,33 +115,19 @@ pipeline {
                             echo "Deployed ${demoId}!"
                         }
                     }
-                } // script
-            } // steps
-        } // stage
+                }
+            } 
+        } 
        stage('preview') {
             steps {
                 script {
                     timeout(time: 10, unit: 'MINUTES') {
                         input message: "Does the deployment look good?"
                     }
-                } // script
-            } // steps
-        } // stage
-//        stage('tag') {
-//            steps {
-//                script {
-//                    openshift.withCluster() {
-//                        openshift.withProject() {
-//                            // if everything else succeeded, tag the ${demoId}:latest image as ${demoId}-staging:latest
-//                            // a pipeline build config for the staging environment can watch for the ${demoId}-staging:latest
-//                            // image to change and then deploy it to the staging environment
-//                            openshift.tag("${demoId}:latest", "${demoId}-staging:latest")
-//                        }
-//                    }
-//                } // script
-//            } // steps
-//        } // stage
-    } // stages
+                }
+            } 
+        }
+    }
     post {
         always {
             script {
@@ -149,7 +150,7 @@ pipeline {
                         }
                     }
                 }
-            } // script
+            }
         }
     }
 } // pipeline
