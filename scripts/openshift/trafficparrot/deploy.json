@@ -56,23 +56,6 @@
             }
           },
           "spec": {
-            "initContainers": [
-              {
-                "name": "${APPLICATION_NAME}-init",
-                "image": "${APPLICATION_NAME}",
-                "volumeMounts": [
-                  {
-                    "name": "mappings-volume",
-                    "mountPath": "/mappings"
-                  },
-                  {
-                    "name": "mappings-volume-rw",
-                    "mountPath": "/mappings-rw"
-                  }
-                ],
-                "command": ["sh", "-c", "cp -R /mappings/* /mappings-rw"]
-              }
-            ],
             "containers": [
               {
                 "name": "${APPLICATION_NAME}",
@@ -107,12 +90,6 @@
                     "initialDelaySeconds": 10
                   }
                 },
-                "volumeMounts": [
-                  {
-                    "name": "mappings-volume-rw",
-                    "mountPath": "/opt/trafficparrot/mappings"
-                  }
-                ],
                 "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
@@ -120,18 +97,6 @@
                   "capabilities": {},
                   "privileged": false
                 }
-              }
-            ],
-            "volumes": [
-              {
-                "name": "mappings-volume",
-                "configMap": {
-                  "name": "${APPLICATION_NAME}-mappings"
-                }
-              },
-              {
-                "name": "mappings-volume-rw",
-                "emptyDir": {}
               }
             ],
             "restartPolicy": "Always",

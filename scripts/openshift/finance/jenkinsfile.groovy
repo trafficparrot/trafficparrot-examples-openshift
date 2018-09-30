@@ -54,9 +54,6 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            echo "Configure ${trafficParrotId} mappings"
-                            openshift.create("configmap", trafficParrotMappingsId, "--from-file=scripts/openshift/trafficparrot/mappings")
-
                             echo "Deploy: ${trafficParrotId}"
                             openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
