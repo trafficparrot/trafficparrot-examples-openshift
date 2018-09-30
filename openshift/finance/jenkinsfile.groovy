@@ -56,10 +56,15 @@ pipeline {
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
                             def latestDeploymentVersion = openshift.selector('dc',"${trafficParrotId}").object().status.latestVersion
+                            echo "latestDeploymentVersion=${latestDeploymentVersion}"
+
                             def rc = openshift.selector('rc', "${trafficParrotId}-${latestDeploymentVersion}")
                             rc.untilEach(1){
                                 def rcMap = it.object()
-                                return (rcMap.status.replicas.equals(rcMap.status.readyReplicas))
+                                def replicas = rcMap.status.replicas
+                                def readyReplicas = rcMap.status.readyReplicas
+                                echo "replicas=${replicas}, readyReplicas=${readyReplicas}"
+                                return replicas.equals(readyReplicas)
                             }
                             echo "Deployed ${trafficParrotId}!"
                         }
