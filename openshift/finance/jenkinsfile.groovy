@@ -33,7 +33,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Start build for: ${demoId}"
-                            openshift.newApp("scripts/openshift/finance/build.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
+                            openshift.newApp("openshift/finance/build.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
 
                             echo "Waiting for build ${demoId} to finish..."
                             def builds = openshift.selector("bc", demoId).related('builds')
@@ -52,7 +52,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Deploy: ${trafficParrotId}"
-                            openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
+                            openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
@@ -70,7 +70,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
-                            def importStatus = sh(returnStatus: true, script: "curl --fail --form 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
+                            def importStatus = sh(returnStatus: true, script: "curl --fail --form 'files[]=@openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
                             if (importStatus != 0) {
                                 error('Import failed!')
                             }
@@ -94,7 +94,7 @@ pipeline {
                             openshift.create("configmap", demoConfigId, "--from-literal=finance-application.properties=finance-application.markit.url=http://${trafficParrotId}:18081/MODApis/Api/v2/Quote/json")
 
                             echo "Deploy: ${demoId}"
-                            openshift.newApp("scripts/openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
+                            openshift.newApp("openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
 
                             echo "Waiting on deploy for: ${demoId}"
                             openshift.selector("dc", demoId).related('pods').untilEach(1) {

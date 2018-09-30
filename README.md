@@ -70,7 +70,7 @@ docker build \
 --build-arg TRAFFIC_PARROT_ZIP=<fill this in> \
 --build-arg ACCEPT_LICENSE=<fill this in> \
 --tag trafficparrot:4.1.6 \
---file scripts/openshift/trafficparrot/Dockerfile .
+--file openshift/trafficparrot/Dockerfile .
 ```
 
 Next, we tag and push to the cluster registry:
@@ -79,76 +79,31 @@ docker tag trafficparrot:4.1.6 ${CLUSTER_REGISTRY}/trafficparrot-test/trafficpar
 docker push ${CLUSTER_REGISTRY}/trafficparrot-test/trafficparrot-image
 ```
 
-TODO this could all be done in the sample pipeline
-### Spin up a Traffic Parrot app
-First, we will generate a random name to use for the instance:
-```
-TRAFFIC_PARROT_ID=trafficparrot-${RANDOM}
-```
+### Install Jenkins
+You will need Jenkins in the OpenShift cluster to provide CI/CD support for the pipeline.
 
-Now we can use the `trafficparrot-image` that we created to create the app:
-```
-oc new-app --image-stream=trafficparrot-image --name=${TRAFFIC_PARROT_ID}
-```
+The easiest way to do this is via the web console catalog:
 
-We will expose a service for the deployment, with the HTTP and HTTP management ports:
-```
-oc expose dc ${TRAFFIC_PARROT_ID} --port=18081,18083
-```
+![Alt text](images/openshift-jenkins.png?raw=true "Install Jenkins")
 
-For demo purposes, we will expose routes for these ports:
-```
-oc expose service ${TRAFFIC_PARROT_ID} --name=${TRAFFIC_PARROT_ID}-http --port=18081
-oc expose service ${TRAFFIC_PARROT_ID} --name=${TRAFFIC_PARROT_ID}-http-management --port=18083
-```
-This is not required in the pipeline if everything is inside the cluster and can see the service.
+The default values are enough for this example project to work.
 
-### Use the REST API to import an OpenAPI specification
-The HTTP management URL outside of the cluster is determined by the exposed route:
-```
-TRAFFIC_PARROT_HTTP_MANAGEMENT_URL=http://$(oc get route ${TRAFFIC_PARROT_ID}-http-management -o jsonpath='{.spec.host}')
-```
-
-We can upload an OpenAPI specification using the management API. In this example we are using `curl` but you can use any tool you want:
-```
-curl -F 'files[]=@scripts/openshift/finance/markit.yaml' ${TRAFFIC_PARROT_HTTP_MANAGEMENT_URL}/http/management/importMappings
-```
-
-The HTTP virtual service URL outside of the cluster is determined by the exposed route:
-```
-TRAFFIC_PARROT_HTTP_URL=http://$(oc get route ${TRAFFIC_PARROT_ID}-http -o jsonpath='{.spec.host}')
-```
-
-Then, we can check that the virtual service was created using the virtual service API. In this example we are using `curl` but you can use any tool you want:
-```
-curl -v ${TRAFFIC_PARROT_HTTP_URL}/MODApis/Api/v2/Quote/json
-```
-
-TODO this could all be done in the sample pipeline
-### Spin the demo app up
-TODO move to preamble
+### Import and run the pipeline
 First we need the ability to build Java images:
 ```
-oc create -f scripts/openshift/openjdk-s2i-imagestream.json
+oc create -f openshift/openjdk-s2i-imagestream.json
 ```
 
-We will generate a random name to use for the instance:
+Now we can import the pipeline:
 ```
-DEMO_ID=finance-${RANDOM}
-```
-
-We also need to configure the demo app to point to the Traffic Parrot service we created. Note that we use the `TRAFFIC_PARROT_ID` as the DNS name of the service. We use a config map for this:
-```
-echo "finance-application.markit.url=http://${TRAFFIC_PARROT_ID}:18081/MODApis/Api/v2/Quote/json" > scripts/openshift/finance/finance-application.properties
-oc create configmap ${DEMO_ID}-config --from-file=scripts/openshift/finance/finance-application.properties
+oc create -f openshift/finance/pipeline.yaml
 ```
 
-Now we can tell OpenShift to build and deploy:
-```
-oc new-app --file=scripts/openshift/finance/template.json --param=APPLICATION_NAME=${DEMO_ID} --name=${DEMO_ID}
-```
+Next, run the pipeline:
 
-### Get the demo app to use Traffic Parrot
+![Alt text](images/openshift-start-pipeline.png?raw=true "Start Pipeline")
+
+### Check the demo app
 The demo app URL outside of the cluster is determined by the exposed route:
 ```
 DEMO_URL=http://$(oc get route ${DEMO_ID} -o jsonpath='{.spec.host}')
@@ -159,7 +114,15 @@ Then, we can check that the demo application is able to talk to Traffic Parrot a
 curl -v ${DEMO_URL}/stock-quote-last-price
 ```
 
+### Approve the preview in the pipeline
+
+
 ### Clean up
+To clean up the pipeline:
+```
+oc delete bc finance-pipeline
+```
+
 To clean up the demo app:
 ```
 oc delete all -l "app=${DEMO_ID}"

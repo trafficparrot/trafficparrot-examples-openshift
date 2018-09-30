@@ -10,4 +10,4 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       type: JenkinsPipeline
-      jenkinsfilePath: scripts/openshift/finance/jenkinsfile.groovy
+      jenkinsfilePath: openshift/finance/jenkinsfile.groovy
