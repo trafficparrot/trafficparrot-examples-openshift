@@ -58,6 +58,16 @@ pipeline {
                             openshift.selector("dc", trafficParrotId).untilEach(1) {
                                 return (it.object().status.availableReplicas == 1)
                             }
+
+                            def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host
+                            timeout(time: 3, unit: 'MINUTES') {
+                                while (true) {
+                                    def status = sh(returnStatus: true, script: "curl --fail -X OPTIONS http://${managementRoute}")
+                                    if (status == 0) {
+                                        return
+                                    }
+                                }
+                            }
                             echo "Deployed ${trafficParrotId}!"
                         }
                     }
@@ -69,7 +79,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
+                            def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host
                             def importStatus = sh(returnStatus: true, script: "curl --fail --form 'files[]=@openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
                             if (importStatus != 0) {
                                 error('Import failed!')
