@@ -55,7 +55,7 @@ pipeline {
                             openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
-                            openshift.selector("dc", demoId).untilEach(1) {
+                            openshift.selector("dc", trafficParrotId).untilEach(1) {
                                 return (it.object().status.availableReplicas == 1)
                             }
                             echo "Deployed ${trafficParrotId}!"
