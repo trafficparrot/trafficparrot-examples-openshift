@@ -12,11 +12,7 @@ RUN unzip trafficparrot.zip && rm trafficparrot.zip && mv trafficparrot-enterpri
 WORKDIR /opt/trafficparrot
 
 # create standard mappings directories so that they are read-write even if e.g. a config map is mounted
-RUN mkdir mappings
-RUN mkdir __files
-RUN mkdir grpc-mappings
-RUN mkdir proto-bin
-RUN mkdir proto
+RUN mkdir mappings __files grpc-mappings proto-bin proto
 
 # https://docs.openshift.com/container-platform/3.10/creating_images/guidelines.html#use-uid
 RUN chgrp -R 0 /opt/trafficparrot && chmod -R g+rwX /opt/trafficparrot
