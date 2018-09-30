@@ -67,6 +67,20 @@
                     "protocol": "TCP"
                   }
                 ],
+                "livenessProbe": {
+                  "httpGet": {
+                    "path": "/ready",
+                    "port": 8282,
+                    "initialDelaySeconds": 5
+                  }
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/ready",
+                    "port": 8282,
+                    "initialDelaySeconds": 5
+                  }
+                },
                 "volumeMounts": [
                   {
                     "name": "config-volume",

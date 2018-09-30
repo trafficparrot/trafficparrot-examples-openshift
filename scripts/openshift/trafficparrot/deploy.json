@@ -72,6 +72,18 @@
                     "protocol": "TCP"
                   }
                 ],
+                "livenessProbe": {
+                  "tcpSocket": {
+                    "port": 18083,
+                    "initialDelaySeconds": 5
+                  }
+                },
+                "readinessProbe": {
+                  "tcpSocket": {
+                    "port": 18083,
+                    "initialDelaySeconds": 5
+                  }
+                },
                 "volumeMounts": [
                   {
                     "name": "mappings-volume",

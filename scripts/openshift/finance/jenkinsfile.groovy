@@ -7,20 +7,8 @@ def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
 def trafficParrotMappingsId = "${trafficParrotId}-mappings"
 
 // TODO:
-//1. mount TP config
-//1. deploy TP
 //1. upload the file to import
-//1. configure demo
-//1. deploy demo
-//1. manual gate
-//1. clean up
 
-// to mount the /mappings directory that is committed:
-//oc create configmap trafficparrot-17172-mappings --from-file=scripts/openshift/trafficparrot/mappings
-
-// NOTE, the "pipeline" directive/closure from the declarative pipeline syntax needs to include, or be nested outside,
-// and "openshift" directive/closure from the OpenShift Client Plugin for Jenkins.  Otherwise, the declarative pipeline engine
-// will not be fully engaged.
 pipeline {
     agent any
     options {
