@@ -92,8 +92,7 @@
               {
                 "name": "config-volume",
                 "configMap": {
-                  "name": "${APPLICATION_NAME}-config",
-                  "optional": true
+                  "name": "${APPLICATION_NAME}-config"
                 }
               }
             ],

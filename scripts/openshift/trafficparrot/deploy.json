@@ -37,7 +37,7 @@
               ],
               "from": {
                 "kind": "ImageStreamTag",
-                "name": "${APPLICATION_NAME}:latest"
+                "name": "trafficparrot-image:latest"
               }
             }
           },
