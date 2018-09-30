@@ -6,7 +6,7 @@ spec:
   source:
     git:
       uri: "https://github.com/trafficparrot/trafficparrot-examples-openshift"
-      ref: "pipeline"
+      ref: "master"
   strategy:
     jenkinsPipelineStrategy:
       type: JenkinsPipeline

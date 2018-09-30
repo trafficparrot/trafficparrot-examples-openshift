@@ -51,7 +51,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Deploy: ${trafficParrotId}"
-                            openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}", "--limits=cpu=0.5,memory=256Mi")
+                            openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).untilEach(1) {
@@ -103,7 +103,7 @@ pipeline {
                             openshift.create("configmap", demoConfigId, "--from-literal=finance-application.properties=finance-application.markit.url=http://${trafficParrotId}:18081/MODApis/Api/v2/Quote/json")
 
                             echo "Deploy: ${demoId}"
-                            openshift.newApp("openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}", "--limits=cpu=0.25,memory=128Mi")
+                            openshift.newApp("openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
 
                             echo "Waiting on deploy for: ${demoId}"
                             openshift.selector("dc", demoId).untilEach(1) {

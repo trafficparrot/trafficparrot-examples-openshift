@@ -25,7 +25,13 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate"
+          "type": "Recreate",
+          "resources": {
+            "limits": {
+              "cpu": 0.25,
+              "memory": "128Mi"
+            }
+          }
         },
         "triggers": [
           {
@@ -93,6 +99,12 @@
                     "value": "/app/config/finance-application.properties"
                   }
                 ],
+                "resources": {
+                  "limits": {
+                    "cpu": 0.25,
+                    "memory": "128Mi"
+                  }
+                },
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {

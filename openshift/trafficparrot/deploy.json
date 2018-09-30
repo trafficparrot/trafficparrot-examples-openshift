@@ -25,7 +25,13 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate"
+          "type": "Recreate",
+          "resources": {
+            "limits": {
+              "cpu": 0.5,
+              "memory": "256Mi"
+            }
+          }
         },
         "triggers": [
           {
@@ -88,6 +94,12 @@
                       "virtualservice.started"
                     ],
                     "initialDelaySeconds": 20
+                  }
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": 0.5,
+                    "memory": "256Mi"
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
