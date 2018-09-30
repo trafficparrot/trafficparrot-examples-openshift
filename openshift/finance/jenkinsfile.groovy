@@ -55,16 +55,8 @@ pipeline {
                             openshift.newApp("openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
-                            def latestDeploymentVersion = openshift.selector('dc',"${trafficParrotId}").object().status.latestVersion
-                            echo "latestDeploymentVersion=${latestDeploymentVersion}"
-
-                            def rc = openshift.selector('rc', "${trafficParrotId}-${latestDeploymentVersion}")
-                            rc.untilEach(1){
-                                def rcMap = it.object()
-                                def replicas = rcMap.status.replicas
-                                def readyReplicas = rcMap.status.readyReplicas
-                                echo "replicas=${replicas}, readyReplicas=${readyReplicas}"
-                                return replicas.equals(readyReplicas)
+                            openshift.selector("dc", demoId).untilEach(1) {
+                                return (it.object().status.availableReplicas == 1)
                             }
                             echo "Deployed ${trafficParrotId}!"
                         }
@@ -105,11 +97,8 @@ pipeline {
                             openshift.newApp("openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
 
                             echo "Waiting on deploy for: ${demoId}"
-                            def latestDeploymentVersion = openshift.selector('dc',"${demoId}").object().status.latestVersion
-                            def rc = openshift.selector('rc', "${demoId}-${latestDeploymentVersion}")
-                            rc.untilEach(1){
-                                def rcMap = it.object()
-                                return (rcMap.status.replicas.equals(rcMap.status.readyReplicas))
+                            openshift.selector("dc", demoId).untilEach(1) {
+                                return (it.object().status.availableReplicas == 1)
                             }
                             echo "Deployed ${demoId}!"
                         }
