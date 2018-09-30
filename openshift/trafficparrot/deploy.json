@@ -60,6 +60,16 @@
               {
                 "name": "${APPLICATION_NAME}",
                 "image": "${APPLICATION_NAME}",
+                "resources": {
+                  "limits": {
+                    "cpu": 0.5,
+                    "memory": "256Mi"
+                  },
+                  "requests": {
+                    "cpu": 0.5,
+                    "memory": "256Mi"
+                  }
+                },
                 "ports": [
                   {
                     "name": "http",
@@ -90,7 +100,6 @@
                     "initialDelaySeconds": 20
                   }
                 },
-                "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {

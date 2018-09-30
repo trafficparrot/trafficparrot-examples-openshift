@@ -60,6 +60,16 @@
               {
                 "name": "${APPLICATION_NAME}",
                 "image": "${APPLICATION_NAME}",
+                "resources": {
+                  "limits": {
+                    "cpu": 0.25,
+                    "memory": "128Mi"
+                  },
+                  "requests": {
+                    "cpu": 0.25,
+                    "memory": "128Mi"
+                  }
+                },
                 "ports": [
                   {
                     "name": "http",
@@ -93,7 +103,6 @@
                     "value": "/app/config/finance-application.properties"
                   }
                 ],
-                "resources": {},
                 "terminationMessagePath": "/dev/termination-log",
                 "imagePullPolicy": "Always",
                 "securityContext": {
