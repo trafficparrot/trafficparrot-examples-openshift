@@ -62,7 +62,7 @@ pipeline {
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
-                                return (it.object().status.phase == "Running")
+                                return (it.object().status.containerStatuses[0].ready == true)
                             }
                             echo "Deployed ${trafficParrotId}!"
                         }
@@ -104,7 +104,7 @@ pipeline {
 
                             echo "Waiting on deploy for: ${demoId}"
                             openshift.selector("dc", demoId).related('pods').untilEach(1) {
-                                return (it.object().status.phase == "Running")
+                                return (it.object().status.containerStatuses[0].ready == true)
                             }
                             echo "Deployed ${demoId}!"
                         }
