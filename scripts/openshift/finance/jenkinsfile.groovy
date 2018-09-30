@@ -76,10 +76,16 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
-                            sh "curl -F 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings"
+                            def importStatus = sh(returnStatus: true, script: "curl -F 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
+                            if (importStatus != 0) {
+                                error('Import failed!')
+                            }
 
                             def httpRoute = openshift.selector("route", "${trafficParrotId}-http").object().spec.host;
-                            sh "curl -v http://${httpRoute}/MODApis/Api/v2/Quote/json"
+                            def checkStatus = sh(returnStatus: true, script: "curl -v http://${httpRoute}/MODApis/Api/v2/Quote/json")
+                            if (checkStatus != 0) {
+                                error('Check failed!')
+                            }
                         }
                     }
                 }
