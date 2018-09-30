@@ -1,9 +1,10 @@
 import java.util.Random;
 
-// path of the template to use
-// name of the template that will be created
 def demoId = "finance-" + (10000 + new Random().nextInt(10000))
+def demoConfigId = "${demoId}-config"
+
 def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
+def trafficParrotMappingsId = "${trafficParrotId}-mappings"
 
 // TODO:
 //1. mount TP config
@@ -33,29 +34,22 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Using project: ${openshift.project()}"
-                            echo "Using demo id: ${demoId}"
+                            echo "Using demoId: ${demoId}"
+                            echo "Using trafficParrotId: ${trafficParrotId}"
+                            echo "Using trafficParrotMappingsId: ${trafficParrotMappingsId}"
                         }
                     }
                 }
             }
         }
-        stage('create') {
+        stage('build-demo') {
             steps {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Start build for: ${demoId}"
                             openshift.newApp("scripts/openshift/finance/build.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
-                        }
-                    }
-                } // script
-            } // steps
-        } // stage
-        stage('build') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
+
                             echo "Waiting for build ${demoId} to finish..."
                             def builds = openshift.selector("bc", demoId).related('builds')
                             builds.untilEach(1) {
@@ -73,7 +67,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Configure ${trafficParrotId} mappings"
-                            openshift.create("configmap", "${trafficParrotId}-mappings")
+                            openshift.create("configmap", trafficParrotMappingsId, "--from-file=scripts/openshift/trafficparrot/mappings")
 
                             echo "Deploy: ${trafficParrotId}"
                             openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
@@ -82,6 +76,31 @@ pipeline {
                             openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
                                 return (it.object().status.phase == "Running")
                             }
+                            echo "Deployed ${trafficParrotId}!"
+                        }
+                    }
+                } // script
+            } // steps
+        } // stage
+        stage('deploy-demo') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            echo "Configure ${demoId} properties"
+                            String financeProperties = 'scripts/openshift/finance/finance-application.properties'
+                            File configFile = new File(financeProperties)
+                            configFile.write "finance-application.markit.url=http://${TRAFFIC_PARROT_ID}:18081/MODApis/Api/v2/Quote/json"
+                            openshift.create("configmap", demoConfigId, "--from-file=${financeProperties}")
+
+                            echo "Deploy: ${demoId}"
+                            openshift.newApp("scripts/openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
+
+                            echo "Waiting on deploy for: ${demoId}"
+                            openshift.selector("dc", demoId).related('pods').untilEach(1) {
+                                return (it.object().status.phase == "Running")
+                            }
+                            echo "Deployed ${demoId}!"
                         }
                     }
                 } // script
@@ -110,10 +129,17 @@ pipeline {
                         echo "Cleaning up ${demoId}"
                         openshift.selector("all", [ "app" : demoId ]).delete()
 
+                        if (openshift.selector("configmap", demoConfigId).exists()) {
+                            echo "Cleaning up ${demoConfigId}"
+                            openshift.selector("configmap", demoConfigId).delete()
+                        }
+
                         echo "Cleaning up ${trafficParrotId}"
                         openshift.selector("all", [ "app" : trafficParrotId ]).delete()
-                        if (openshift.selector("configmap", trafficParrotId).exists()) {
-                            openshift.selector("configmap", trafficParrotId).delete()
+
+                        if (openshift.selector("configmap", trafficParrotMappingsId).exists()) {
+                            echo "Cleaning up ${trafficParrotMappingsId}"
+                            openshift.selector("configmap", trafficParrotMappingsId).delete()
                         }
                     }
                 }
