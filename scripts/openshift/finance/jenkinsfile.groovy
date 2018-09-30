@@ -59,53 +59,53 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             // create a new application from the templatePath
-                            openshift.newApp(templatePath, "--name=" + templateName)
+                            openshift.newApp("scripts/openshift/finance/build.json", "--name=" + templateName)
                         }
                     }
                 } // script
             } // steps
         } // stage
-        stage('build') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            def builds = openshift.selector("bc", templateName).related('builds')
-                            builds.untilEach(1) {
-                                return (it.object().status.phase == "Complete")
-                            }
-                        }
-                    }
-                } // script
-            } // steps
-        } // stage
-        stage('deploy') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            def rm = openshift.selector("dc", templateName).rollout()
-                            openshift.selector("dc", templateName).related('pods').untilEach(1) {
-                                return (it.object().status.phase == "Running")
-                            }
-                        }
-                    }
-                } // script
-            } // steps
-        } // stage
-        stage('tag') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            // if everything else succeeded, tag the ${templateName}:latest image as ${templateName}-staging:latest
-                            // a pipeline build config for the staging environment can watch for the ${templateName}-staging:latest
-                            // image to change and then deploy it to the staging environment
-                            openshift.tag("${templateName}:latest", "${templateName}-staging:latest")
-                        }
-                    }
-                } // script
-            } // steps
-        } // stage
+//        stage('build') {
+//            steps {
+//                script {
+//                    openshift.withCluster() {
+//                        openshift.withProject() {
+//                            def builds = openshift.selector("bc", templateName).related('builds')
+//                            builds.untilEach(1) {
+//                                return (it.object().status.phase == "Complete")
+//                            }
+//                        }
+//                    }
+//                } // script
+//            } // steps
+//        } // stage
+//        stage('deploy') {
+//            steps {
+//                script {
+//                    openshift.withCluster() {
+//                        openshift.withProject() {
+//                            def rm = openshift.selector("dc", templateName).rollout()
+//                            openshift.selector("dc", templateName).related('pods').untilEach(1) {
+//                                return (it.object().status.phase == "Running")
+//                            }
+//                        }
+//                    }
+//                } // script
+//            } // steps
+//        } // stage
+//        stage('tag') {
+//            steps {
+//                script {
+//                    openshift.withCluster() {
+//                        openshift.withProject() {
+//                            // if everything else succeeded, tag the ${templateName}:latest image as ${templateName}-staging:latest
+//                            // a pipeline build config for the staging environment can watch for the ${templateName}-staging:latest
+//                            // image to change and then deploy it to the staging environment
+//                            openshift.tag("${templateName}:latest", "${templateName}-staging:latest")
+//                        }
+//                    }
+//                } // script
+//            } // steps
+//        } // stage
     } // stages
 } // pipeline
