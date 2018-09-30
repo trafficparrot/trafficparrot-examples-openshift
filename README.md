@@ -112,9 +112,9 @@ The pipeline will:
 
 ![Alt text](images/openshift-preview-pipeline.png?raw=true "Preview Pipeline Step")
 
-To preview the demo, click on the route:
+To preview the demo, click on the finance route:
 
-![Alt text](images/openshift-finance-route.png?raw=true "Finance Route")
+![Alt text](images/openshift-routes.png?raw=true "Finance Route")
 
 You should see this:
 
