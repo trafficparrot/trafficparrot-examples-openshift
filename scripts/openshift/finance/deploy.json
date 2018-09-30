@@ -71,14 +71,14 @@
                   "httpGet": {
                     "path": "/ready",
                     "port": 8282,
-                    "initialDelaySeconds": 5
+                    "initialDelaySeconds": 10
                   }
                 },
                 "readinessProbe": {
                   "httpGet": {
                     "path": "/ready",
                     "port": 8282,
-                    "initialDelaySeconds": 5
+                    "initialDelaySeconds": 10
                   }
                 },
                 "volumeMounts": [
