@@ -78,7 +78,7 @@
                       "cat",
                       "virtualservice.started"
                     ],
-                    "initialDelaySeconds": 10
+                    "initialDelaySeconds": 20
                   }
                 },
                 "readinessProbe": {
@@ -87,7 +87,7 @@
                       "cat",
                       "virtualservice.started"
                     ],
-                    "initialDelaySeconds": 10
+                    "initialDelaySeconds": 20
                   }
                 },
                 "resources": {},
