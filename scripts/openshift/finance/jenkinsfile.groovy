@@ -2,7 +2,7 @@ import java.util.Random;
 
 // path of the template to use
 // name of the template that will be created
-def demoId = "finance" + (10000 + new Random().nextInt(10000))
+def demoId = "finance-" + (10000 + new Random().nextInt(10000))
 
 // TODO:
 //1. mount TP config
@@ -37,22 +37,6 @@ pipeline {
                 }
             }
         }
-        stage('cleanup') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            // delete everything with this template label
-                            openshift.selector("all", [ template : demoId ]).delete()
-                            // delete any secrets with this template label
-                            if (openshift.selector("secrets", demoId).exists()) {
-                                openshift.selector("secrets", demoId).delete()
-                            }
-                        }
-                    }
-                } // script
-            } // steps
-        } // stage
         stage('create') {
             steps {
                 script {
@@ -65,20 +49,36 @@ pipeline {
                 } // script
             } // steps
         } // stage
-//        stage('build') {
-//            steps {
-//                script {
-//                    openshift.withCluster() {
-//                        openshift.withProject() {
-//                            def builds = openshift.selector("bc", demoId).related('builds')
-//                            builds.untilEach(1) {
-//                                return (it.object().status.phase == "Complete")
-//                            }
-//                        }
-//                    }
-//                } // script
-//            } // steps
-//        } // stage
+        stage('build') {
+            steps {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            def builds = openshift.selector("bc", demoId).related('builds')
+                            builds.untilEach(1) {
+                                return (it.object().status.phase == "Complete")
+                            }
+                        }
+                    }
+                } // script
+            } // steps
+        } // stage
+        post {
+            always {
+                script {
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            // delete everything with this template label
+                            openshift.selector("all", [ template : demoId ]).delete()
+                            // delete any secrets with this template label
+                            if (openshift.selector("secrets", demoId).exists()) {
+                                openshift.selector("secrets", demoId).delete()
+                            }
+                        }
+                    }
+                } // script
+            }
+        }
 //        stage('deploy') {
 //            steps {
 //                script {
