@@ -103,6 +103,15 @@ pipeline {
                 } // script
             } // steps
         } // stage
+       stage('preview') {
+            steps {
+                script {
+                    timeout(time: 10, unit: 'MINUTES') {
+                        input message: "Does the deployment look good?"
+                    }
+                } // script
+            } // steps
+        } // stage
 //        stage('tag') {
 //            steps {
 //                script {
