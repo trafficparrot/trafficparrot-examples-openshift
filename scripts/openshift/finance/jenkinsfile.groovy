@@ -63,22 +63,6 @@ pipeline {
                 } // script
             } // steps
         } // stage
-        post {
-            always {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            // delete everything with this template label
-                            openshift.selector("all", [ template : demoId ]).delete()
-                            // delete any secrets with this template label
-                            if (openshift.selector("secrets", demoId).exists()) {
-                                openshift.selector("secrets", demoId).delete()
-                            }
-                        }
-                    }
-                } // script
-            }
-        }
 //        stage('deploy') {
 //            steps {
 //                script {
@@ -108,4 +92,20 @@ pipeline {
 //            } // steps
 //        } // stage
     } // stages
+    post {
+        always {
+            script {
+                openshift.withCluster() {
+                    openshift.withProject() {
+                        // delete everything with this template label
+                        openshift.selector("all", [ template : demoId ]).delete()
+                        // delete any secrets with this template label
+                        if (openshift.selector("secrets", demoId).exists()) {
+                            openshift.selector("secrets", demoId).delete()
+                        }
+                    }
+                }
+            } // script
+        }
+    }
 } // pipeline
