@@ -88,7 +88,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Configure ${demoId} properties"
-                            openshift.create("configmap", demoConfigId, "--from-literal=finance-application.properties=finance-application.markit.url=http://${TRAFFIC_PARROT_ID}:18081/MODApis/Api/v2/Quote/json")
+                            openshift.create("configmap", demoConfigId, "--from-literal=finance-application.properties=finance-application.markit.url=http://${trafficParrotId}:18081/MODApis/Api/v2/Quote/json")
 
                             echo "Deploy: ${demoId}"
                             openshift.newApp("scripts/openshift/finance/deploy.json", "--name=${demoId}", "--param=APPLICATION_NAME=${demoId}")
