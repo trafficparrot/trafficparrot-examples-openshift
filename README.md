@@ -103,6 +103,23 @@ Next, run the pipeline:
 
 ![Alt text](images/openshift-start-pipeline.png?raw=true "Start Pipeline")
 
+The pipeline will:
+1. Build the `finance-application` demo image
+1. Deploy Traffic Parrot using the `trafficparrot-image` we pushed to the registry earlier
+1. Import the OpenAPI definition [markit.yaml](openshift/finance/markit.yaml) into Traffic Parrot
+1. Deploy the `finance-application`
+1. Wait for you to preview the demo
+
+![Alt text](images/openshift-preview-pipeline.png?raw=true "Preview Pipeline Step")
+
+To preview the demo, click on the route:
+
+![Alt text](images/openshift-finance-route.png?raw=true "Finance Route")
+
+You should see this:
+
+![Alt text](images/openshift-finance-app.png?raw=true "Finance App")
+
 ### Check the demo app
 The demo app URL outside of the cluster is determined by the exposed route:
 ```

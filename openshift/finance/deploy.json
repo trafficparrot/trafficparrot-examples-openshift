@@ -117,19 +117,6 @@
       }
     },
     {
-      "kind": "Route",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${APPLICATION_NAME}"
-      },
-      "spec": {
-        "to": {
-          "kind": "Service",
-          "name": "${APPLICATION_NAME}"
-        }
-      }
-    },
-    {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {
@@ -148,6 +135,19 @@
         ],
         "selector": {
           "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "to": {
+          "kind": "Service",
+          "name": "${APPLICATION_NAME}"
         }
       }
     }

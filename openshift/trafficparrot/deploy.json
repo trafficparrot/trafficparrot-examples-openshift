@@ -104,6 +104,31 @@
           }
         }
       }
+    },    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}"
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 18081,
+            "targetPort": 18081
+          },
+          {
+            "name": "http-management",
+            "protocol": "TCP",
+            "port": 18083,
+            "targetPort": 18083
+          }
+        ],
+        "selector": {
+          "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      }
     },
     {
       "kind": "Route",
@@ -140,32 +165,6 @@
         "to": {
           "kind": "Service",
           "name": "${APPLICATION_NAME}"
-        }
-      }
-    },
-    {
-      "kind": "Service",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${APPLICATION_NAME}"
-      },
-      "spec": {
-        "ports": [
-          {
-            "name": "http",
-            "protocol": "TCP",
-            "port": 18081,
-            "targetPort": 18081
-          },
-          {
-            "name": "http-management",
-            "protocol": "TCP",
-            "port": 18083,
-            "targetPort": 18083
-          }
-        ],
-        "selector": {
-          "deploymentConfig": "${APPLICATION_NAME}"
         }
       }
     }
