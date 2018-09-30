@@ -56,6 +56,23 @@
             }
           },
           "spec": {
+            "initContainers": [
+              {
+                "name": "${APPLICATION_NAME}-init",
+                "image": "busybox",
+                "volumeMounts": [
+                  {
+                    "name": "mappings-volume",
+                    "mountPath": "/mappings"
+                  },
+                  {
+                    "name": "mappings-volume-rw",
+                    "mountPath": "/mappings-rw"
+                  }
+                ],
+                "command": ["sh", "-c", "cp -R /mappings/* /mappings-rw"]
+              }
+            ],
             "containers": [
               {
                 "name": "${APPLICATION_NAME}",
@@ -92,9 +109,8 @@
                 },
                 "volumeMounts": [
                   {
-                    "name": "mappings-volume",
-                    "mountPath": "/opt/trafficparrot/mappings",
-                    "readOnly": false
+                    "name": "mappings-volume-rw",
+                    "mountPath": "/opt/trafficparrot/mappings"
                   }
                 ],
                 "resources": {},
@@ -112,6 +128,10 @@
                 "configMap": {
                   "name": "${APPLICATION_NAME}-mappings"
                 }
+              },
+              {
+                "name": "mappings-volume-rw",
+                "emptyDir": {}
               }
             ],
             "restartPolicy": "Always",
