@@ -4,9 +4,11 @@ These examples will show you how to use Traffic Parrot in an [OpenShift](https:/
 ## Provision an OpenShift cluster
 There are a number of ways you can do this, for example:
 1. Locally using [Minishift](https://github.com/minishift/minishift)
-1. Hosted in [Red Hat OpenShift Online](https://www.openshift.com/products/pricing/) (includes a free tier for personal use)
+1. Hosted in [Red Hat OpenShift Online](https://www.openshift.com/products/pricing/)
 1. Hosted in [AWS](https://aws.amazon.com/quickstart/architecture/openshift/) (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
 1. Hosted on premise (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
+
+You will need 2GiB free to run the entire CI/CD demo including a Jenkins pipeline, demo application deployment and a Traffic Parrot deployment.
 
 ## Install required tools
 1. You will need the `oc` [client tool](https://www.okd.io/download.html#oc-platforms) to issue commands to the cluster
@@ -87,7 +89,7 @@ The easiest way to do this is via the web console catalog:
 
 Change the memory to 750Mi, Jenkins is quite memory hungry. Accept the default values for everything else.
 
-NOTE: It is best to wait at least 10 minutes for Jenkins to fully start up the first time.
+NOTE: It is best to wait at least 10 minutes for Jenkins to fully start up the first time. The UI will initially be unresponsive and return an "Application is not available" message.
 
 ### Import and run the pipeline
 First we need the ability to build Java images:

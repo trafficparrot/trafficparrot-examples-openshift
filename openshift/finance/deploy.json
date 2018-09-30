@@ -95,7 +95,7 @@
                 ],
                 "resources": {
                   "limits": {
-                    "cpu": 0.25,
+                    "cpu": 0.5,
                     "memory": "128Mi"
                   }
                 },
