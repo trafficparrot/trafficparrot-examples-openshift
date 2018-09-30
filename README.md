@@ -79,6 +79,7 @@ docker tag trafficparrot:4.1.6 ${CLUSTER_REGISTRY}/trafficparrot-test/trafficpar
 docker push ${CLUSTER_REGISTRY}/trafficparrot-test/trafficparrot-image
 ```
 
+TODO this could all be done in the sample pipeline
 ### Spin up a Traffic Parrot app
 First, we will generate a random name to use for the instance:
 ```
@@ -123,7 +124,9 @@ Then, we can check that the virtual service was created using the virtual servic
 curl -v ${TRAFFIC_PARROT_HTTP_URL}/MODApis/Api/v2/Quote/json
 ```
 
+TODO this could all be done in the sample pipeline
 ### Spin the demo app up
+TODO move to preamble
 First we need the ability to build Java images:
 ```
 oc create -f scripts/openshift/openjdk-s2i-imagestream.json
