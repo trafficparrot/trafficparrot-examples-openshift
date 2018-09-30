@@ -6,9 +6,6 @@ def demoConfigId = "${demoId}-config"
 def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
 def trafficParrotMappingsId = "${trafficParrotId}-mappings"
 
-// TODO:
-//1. upload the file to import
-
 pipeline {
     agent any
     options {
@@ -73,18 +70,14 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
-                            def importStatus = sh(returnStatus: true, script: "curl -F 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
-                            echo "importStatus=${importStatus}"
+                            def importStatus = sh(returnStatus: true, script: "curl --fail --form 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
                             if (importStatus != 0) {
-                                // TODO not working
                                 error('Import failed!')
                             }
 
                             def httpRoute = openshift.selector("route", "${trafficParrotId}-http").object().spec.host;
-                            def checkStatus = sh(returnStatus: true, script: "curl -v http://${httpRoute}/MODApis/Api/v2/Quote/json")
-                            echo "checkStatus=${checkStatus}"
+                            def checkStatus = sh(returnStatus: true, script: "curl --fail --verbose http://${httpRoute}/MODApis/Api/v2/Quote/json")
                             if (checkStatus != 0) {
-                                // TODO not working
                                 error('Check failed!')
                             }
                         }
