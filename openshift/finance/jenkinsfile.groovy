@@ -9,7 +9,7 @@ def trafficParrotMappingsId = "${trafficParrotId}-mappings"
 pipeline {
     agent any
     options {
-        timeout(time: 30, unit: 'MINUTES')
+        timeout(time: 40, unit: 'MINUTES')
     }
     stages {
         stage('preamble') {
@@ -59,7 +59,7 @@ pipeline {
                             }
 
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host
-                            timeout(time: 3, unit: 'MINUTES') {
+                            timeout(time: 10, unit: 'MINUTES') {
                                 while (true) {
                                     def status = sh(returnStatus: true, script: "curl --fail -X OPTIONS http://${managementRoute}")
                                     if (status == 0) {
