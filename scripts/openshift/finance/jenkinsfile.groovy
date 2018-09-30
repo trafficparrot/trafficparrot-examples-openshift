@@ -72,9 +72,13 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            echo "Start deploy for: ${trafficParrotId}"
+                            echo "Configure deploy for: ${trafficParrotId}"
                             openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
+
+                            echo "Start deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).rollout();
+
+                            echo "Waiting on deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
                                 return (it.object().status.phase == "Running")
                             }
