@@ -20,7 +20,7 @@ def templateName = "finance" + (10000 + new Random().nextInt(10000))
 // and "openshift" directive/closure from the OpenShift Client Plugin for Jenkins.  Otherwise, the declarative pipeline engine
 // will not be fully engaged.
 pipeline {
-    agent {}
+    agent any
     options {
         // set a timeout of 20 minutes for this pipeline
         timeout(time: 20, unit: 'MINUTES')
