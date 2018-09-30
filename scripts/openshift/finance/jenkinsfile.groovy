@@ -15,7 +15,7 @@ def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
 //1. clean up
 
 // to mount the /mappings directory that is committed:
-//oc create configmap game-config --from-file=example-files/
+//oc create configmap trafficparrot-17172-mappings --from-file=scripts/openshift/trafficparrot/mappings
 
 // NOTE, the "pipeline" directive/closure from the declarative pipeline syntax needs to include, or be nested outside,
 // and "openshift" directive/closure from the OpenShift Client Plugin for Jenkins.  Otherwise, the declarative pipeline engine
@@ -72,11 +72,11 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            echo "Configure deploy for: ${trafficParrotId}"
-                            openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
+                            echo "Configure ${trafficParrotId} mappings"
+                            openshift.create("configmap", "${trafficParrotId}-mappings")
 
-                            echo "Start deploy for: ${trafficParrotId}"
-                            openshift.selector("dc", trafficParrotId).rollout();
+                            echo "Deploy: ${trafficParrotId}"
+                            openshift.newApp("scripts/openshift/trafficparrot/deploy.json", "--name=${trafficParrotId}", "--param=APPLICATION_NAME=${trafficParrotId}")
 
                             echo "Waiting on deploy for: ${trafficParrotId}"
                             openshift.selector("dc", trafficParrotId).related('pods').untilEach(1) {
@@ -107,14 +107,13 @@ pipeline {
             script {
                 openshift.withCluster() {
                     openshift.withProject() {
+                        echo "Cleaning up ${demoId}"
                         openshift.selector("all", [ "app" : demoId ]).delete()
-                        if (openshift.selector("secrets", demoId).exists()) {
-                            openshift.selector("secrets", demoId).delete()
-                        }
 
+                        echo "Cleaning up ${trafficParrotId}"
                         openshift.selector("all", [ "app" : trafficParrotId ]).delete()
-                        if (openshift.selector("secrets", trafficParrotId).exists()) {
-                            openshift.selector("secrets", trafficParrotId).delete()
+                        if (openshift.selector("configmap", trafficParrotId).exists()) {
+                            openshift.selector("configmap", trafficParrotId).delete()
                         }
                     }
                 }
