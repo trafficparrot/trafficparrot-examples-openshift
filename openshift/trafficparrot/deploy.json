@@ -25,13 +25,7 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate",
-          "resources": {
-            "limits": {
-              "cpu": 0.5,
-              "memory": "256Mi"
-            }
-          }
+          "type": "Recreate"
         },
         "triggers": [
           {
@@ -66,12 +60,6 @@
               {
                 "name": "${APPLICATION_NAME}",
                 "image": "${APPLICATION_NAME}",
-                "resources": {
-                  "limits": {
-                    "cpu": 0.5,
-                    "memory": "256Mi"
-                  }
-                },
                 "ports": [
                   {
                     "name": "http",
@@ -115,7 +103,8 @@
           }
         }
       }
-    },    {
+    },
+    {
       "kind": "Service",
       "apiVersion": "v1",
       "metadata": {

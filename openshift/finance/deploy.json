@@ -25,13 +25,7 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate",
-          "resources": {
-            "limits": {
-              "cpu": 0.25,
-              "memory": "128Mi"
-            }
-          }
+          "type": "Recreate"
         },
         "triggers": [
           {
@@ -66,12 +60,6 @@
               {
                 "name": "${APPLICATION_NAME}",
                 "image": "${APPLICATION_NAME}",
-                "resources": {
-                  "limits": {
-                    "cpu": 0.25,
-                    "memory": "128Mi"
-                  }
-                },
                 "ports": [
                   {
                     "name": "http",
