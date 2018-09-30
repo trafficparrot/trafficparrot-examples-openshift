@@ -61,16 +61,12 @@ pipeline {
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host
                             Integer stableCount = 2 // wait until the route has been available this many times in a row
                             timeout(time: 10, unit: 'MINUTES') {
-                                Integer count = 0
-                                while (true) {
+                                for (int count = 0; count < stableCount; ) {
                                     def status = sh(returnStatus: true, script: "curl --fail --silent -X OPTIONS http://${managementRoute}")
                                     if (status == 0) {
                                         count++
                                     } else {
                                         count = 0
-                                    }
-                                    if (count == stableCount) {
-                                        return
                                     }
                                     sleep 1 // sleep for a second
                                 }
