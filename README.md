@@ -48,12 +48,11 @@ If you want to start again at any point, you can do:
 oc delete project trafficparrot-test
 ```
 
+### Create a Traffic Parrot image
 Set a local variable that contains the cluster registry, for example:
 * `CLUSTER_REGISTRY=registry.<instance>.openshift.com` for OpenShift online
 * `CLUSTER_REGISTRY=$(minishift openshift registry)` for Minishift
 
-
-### Create a Traffic Parrot image
 Now let's log in to the registry so that we can build and push our Traffic Parrot image:
 ```
 docker login -u developer -p $(oc whoami -t) ${CLUSTER_REGISTRY}
@@ -115,7 +114,7 @@ The pipeline will:
 To preview the demo, click on the finance route:
 
 ![Alt text](images/openshift-routes.png?raw=true "Finance Route")
-
+git
 You should see this:
 
 ![Alt text](images/openshift-finance-app.png?raw=true "Finance App")
