@@ -4,9 +4,12 @@ These examples will show you how to use Traffic Parrot in an [OpenShift](https:/
 ## Provision an OpenShift cluster
 There are a number of ways you can do this, for example:
 1. Locally using [Minishift](https://github.com/minishift/minishift)
-1. Hosted in [Red Hat OpenShift Online](https://www.openshift.com/products/pricing/)
-1. Hosted in [AWS](https://aws.amazon.com/quickstart/architecture/openshift/) (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
-1. Hosted on premise (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
+1. [OpenShift Origin](https://github.com/openshift/origin) open source edition hosted in [AWS](https://sysdig.com/blog/deploy-openshift-aws/)
+1. [OpenShift Origin](https://github.com/openshift/origin) open source edition hosted on premise
+1. Red Hat commercial edition hosted in [OpenShift Online](https://www.openshift.com/products/pricing/)
+1. Red Hat commercial edition hosted in [AWS](https://aws.amazon.com/quickstart/architecture/openshift/) (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
+1. Red Hat commercial edition hosted on premise (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
+
 
 You will need 2GiB free to run the entire CI/CD demo including a Jenkins pipeline, demo application deployment and a Traffic Parrot deployment.
 
