@@ -93,7 +93,8 @@
                 "volumeMounts": [
                   {
                     "name": "mappings-volume",
-                    "mountPath": "/opt/trafficparrot/mappings"
+                    "mountPath": "/opt/trafficparrot/mappings",
+                    "readOnly": false
                   }
                 ],
                 "resources": {},

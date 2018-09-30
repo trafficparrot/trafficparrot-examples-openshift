@@ -77,13 +77,17 @@ pipeline {
                         openshift.withProject() {
                             def managementRoute = openshift.selector("route", "${trafficParrotId}-http-management").object().spec.host;
                             def importStatus = sh(returnStatus: true, script: "curl -F 'files[]=@scripts/openshift/finance/markit.yaml' http://${managementRoute}/http/management/importMappings")
+                            echo "importStatus=${importStatus}"
                             if (importStatus != 0) {
+                                // TODO not working
                                 error('Import failed!')
                             }
 
                             def httpRoute = openshift.selector("route", "${trafficParrotId}-http").object().spec.host;
                             def checkStatus = sh(returnStatus: true, script: "curl -v http://${httpRoute}/MODApis/Api/v2/Quote/json")
+                            echo "checkStatus=${checkStatus}"
                             if (checkStatus != 0) {
+                                // TODO not working
                                 error('Check failed!')
                             }
                         }
