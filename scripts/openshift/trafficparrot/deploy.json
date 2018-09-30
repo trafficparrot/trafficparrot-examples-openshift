@@ -59,7 +59,7 @@
             "initContainers": [
               {
                 "name": "${APPLICATION_NAME}-init",
-                "image": "${APPLICATION_NAME}",
+                "image": "trafficparrot-image:latest",
                 "volumeMounts": [
                   {
                     "name": "mappings-volume",
