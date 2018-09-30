@@ -120,19 +120,9 @@ You should see this:
 
 ![Alt text](images/openshift-finance-app.png?raw=true "Finance App")
 
-### Check the demo app
-The demo app URL outside of the cluster is determined by the exposed route:
-```
-DEMO_URL=http://$(oc get route ${DEMO_ID} -o jsonpath='{.spec.host}')
-```
+You can push the pipeline forwards by clicking on ![Alt text](images/openshift-preview-button.png?raw=true "Input Required") and then the button in Jenkins:
 
-Then, we can check that the demo application is able to talk to Traffic Parrot and return the mocked stock price:
-```
-curl -v ${DEMO_URL}/stock-quote-last-price
-```
-
-### Approve the preview in the pipeline
-
+![Alt text](images/jenkins-pipeline-input.png?raw=true "Jenkins Input")
 
 ### Clean up
 To clean up the pipeline:

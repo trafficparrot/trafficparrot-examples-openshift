@@ -9,8 +9,7 @@ def trafficParrotMappingsId = "${trafficParrotId}-mappings"
 pipeline {
     agent any
     options {
-        // set a timeout of 20 minutes for this pipeline
-        timeout(time: 20, unit: 'MINUTES')
+        timeout(time: 30, unit: 'MINUTES')
     }
     stages {
         stage('preamble') {
@@ -119,7 +118,7 @@ pipeline {
        stage('preview') {
             steps {
                 script {
-                    timeout(time: 10, unit: 'MINUTES') {
+                    timeout(time: 20, unit: 'MINUTES') {
                         input message: "Does the deployment look good?"
                     }
                 }
