@@ -2,7 +2,7 @@ import java.util.Random;
 
 // path of the template to use
 // name of the template that will be created
-def templateName = "finance" + (10000 + new Random().nextInt(10000))
+def demoId = "finance" + (10000 + new Random().nextInt(10000))
 
 // TODO:
 //1. mount TP config
@@ -43,10 +43,10 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             // delete everything with this template label
-                            openshift.selector("all", [ template : templateName ]).delete()
+                            openshift.selector("all", [ template : demoId ]).delete()
                             // delete any secrets with this template label
-                            if (openshift.selector("secrets", templateName).exists()) {
-                                openshift.selector("secrets", templateName).delete()
+                            if (openshift.selector("secrets", demoId).exists()) {
+                                openshift.selector("secrets", demoId).delete()
                             }
                         }
                     }
@@ -59,7 +59,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             // create a new application from the templatePath
-                            openshift.newApp("scripts/openshift/finance/build.json", "--name=" + templateName)
+                            openshift.newApp("scripts/openshift/finance/build.json", "--name=" + demoId, "--param=APPLICATION_NAME=" + demoId)
                         }
                     }
                 } // script
@@ -70,7 +70,7 @@ pipeline {
 //                script {
 //                    openshift.withCluster() {
 //                        openshift.withProject() {
-//                            def builds = openshift.selector("bc", templateName).related('builds')
+//                            def builds = openshift.selector("bc", demoId).related('builds')
 //                            builds.untilEach(1) {
 //                                return (it.object().status.phase == "Complete")
 //                            }
@@ -84,8 +84,8 @@ pipeline {
 //                script {
 //                    openshift.withCluster() {
 //                        openshift.withProject() {
-//                            def rm = openshift.selector("dc", templateName).rollout()
-//                            openshift.selector("dc", templateName).related('pods').untilEach(1) {
+//                            def rm = openshift.selector("dc", demoId).rollout()
+//                            openshift.selector("dc", demoId).related('pods').untilEach(1) {
 //                                return (it.object().status.phase == "Running")
 //                            }
 //                        }
@@ -98,10 +98,10 @@ pipeline {
 //                script {
 //                    openshift.withCluster() {
 //                        openshift.withProject() {
-//                            // if everything else succeeded, tag the ${templateName}:latest image as ${templateName}-staging:latest
-//                            // a pipeline build config for the staging environment can watch for the ${templateName}-staging:latest
+//                            // if everything else succeeded, tag the ${demoId}:latest image as ${demoId}-staging:latest
+//                            // a pipeline build config for the staging environment can watch for the ${demoId}-staging:latest
 //                            // image to change and then deploy it to the staging environment
-//                            openshift.tag("${templateName}:latest", "${templateName}-staging:latest")
+//                            openshift.tag("${demoId}:latest", "${demoId}-staging:latest")
 //                        }
 //                    }
 //                } // script
