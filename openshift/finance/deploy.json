@@ -25,13 +25,7 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate",
-          "resources": {
-            "limits": {
-              "cpu": 0.25,
-              "memory": "128Mi"
-            }
-          }
+          "type": "Recreate"
         },
         "triggers": [
           {

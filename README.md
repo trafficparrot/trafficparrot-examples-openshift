@@ -85,7 +85,9 @@ The easiest way to do this is via the web console catalog:
 
 ![Alt text](images/openshift-jenkins.png?raw=true "Install Jenkins")
 
-The default values are enough for this example project to work.
+Change the memory to 750Mi, Jenkins is quite memory hungry. Accept the default values for everything else.
+
+NOTE: It is best to wait at least 10 minutes for Jenkins to fully start up the first time.
 
 ### Import and run the pipeline
 First we need the ability to build Java images:

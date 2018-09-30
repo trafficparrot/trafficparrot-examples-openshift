@@ -25,13 +25,7 @@
       },
       "spec": {
         "strategy": {
-          "type": "Recreate",
-          "resources": {
-            "limits": {
-              "cpu": 0.5,
-              "memory": "256Mi"
-            }
-          }
+          "type": "Recreate"
         },
         "triggers": [
           {
@@ -98,8 +92,8 @@
                 },
                 "resources": {
                   "limits": {
-                    "cpu": 0.5,
-                    "memory": "256Mi"
+                    "cpu": 0.25,
+                    "memory": "128Mi"
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
