@@ -15,6 +15,23 @@
   ],
   "objects": [
     {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}-files"
+      },
+      "spec": {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources": {
+          "requests": {
+            "storage": "0.5Gi"
+          }
+        }
+      }
+    },
+    {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -97,6 +114,12 @@
                   }
                 },
                 "terminationMessagePath": "/dev/termination-log",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/opt/trafficparrot-files",
+                    "name": "${APPLICATION_NAME}-files"
+                  }
+                ],
                 "imagePullPolicy": "Always",
                 "securityContext": {
                   "capabilities": {},
@@ -105,7 +128,15 @@
               }
             ],
             "restartPolicy": "Always",
-            "dnsPolicy": "ClusterFirst"
+            "dnsPolicy": "ClusterFirst",
+            "volumes": [
+              {
+                "name": "${APPLICATION_NAME}-files",
+                "persistentVolumeClaim": {
+                  "claimName": "${APPLICATION_NAME}-files"
+                }
+              }
+            ]
           }
         }
       }

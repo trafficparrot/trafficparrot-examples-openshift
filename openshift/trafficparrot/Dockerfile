@@ -14,4 +14,12 @@ WORKDIR /opt/trafficparrot
 # https://docs.openshift.com/container-platform/3.10/creating_images/guidelines.html#use-uid
 RUN chgrp -R 0 /opt/trafficparrot && chmod -R g+rwX /opt/trafficparrot
 
-CMD ["./start-foreground.sh", "trafficparrot.gui.http.port=18080", "trafficparrot.virtualservice.http.port=18081", "trafficparrot.virtualservice.http.management.port=18083"]
+RUN mkdir /opt/trafficparrot-files
+
+CMD [ \
+    "./start-foreground.sh", \
+    "trafficparrot.gui.http.port=18080", \
+    "trafficparrot.virtualservice.http.port=18081", \
+    "trafficparrot.virtualservice.http.management.port=18083", \
+    "trafficparrot.virtualservice.trafficFilesRootUrl=file:/opt/trafficparrot-files" \
+]
