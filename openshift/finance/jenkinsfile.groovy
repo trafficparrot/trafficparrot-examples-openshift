@@ -4,7 +4,7 @@ def demoId = "finance-" + (10000 + new Random().nextInt(10000))
 def demoConfigId = "${demoId}-config"
 
 def trafficParrotId = "trafficparrot-" + (10000 + new Random().nextInt(10000))
-def trafficParrotMappingsId = "${trafficParrotId}-mappings"
+def trafficParrotFilesId = "${trafficParrotId}-files"
 
 pipeline {
     agent any
@@ -145,9 +145,9 @@ pipeline {
                         echo "Cleaning up ${trafficParrotId}"
                         openshift.selector("all", [ "app" : trafficParrotId ]).delete()
 
-                        if (openshift.selector("configmap", trafficParrotMappingsId).exists()) {
-                            echo "Cleaning up ${trafficParrotMappingsId}"
-                            openshift.selector("configmap", trafficParrotMappingsId).delete()
+                        if (openshift.selector("pvc", trafficParrotFilesId).exists()) {
+                            echo "Cleaning up ${trafficParrotFilesId}"
+                            openshift.selector("pvc", trafficParrotFilesId).delete()
                         }
                     }
                 }
