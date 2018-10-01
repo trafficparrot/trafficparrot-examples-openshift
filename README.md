@@ -10,7 +10,7 @@ There are a number of ways you can do this, for example:
 1. Red Hat commercial edition hosted in [AWS](https://aws.amazon.com/quickstart/architecture/openshift/) (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
 1. Red Hat commercial edition hosted on premise (requires a [Red Hat subscription](https://www.redhat.com/wapps/ugc/register.html))
 
-You will need 2GiB free RAM and 2GiB free persistent volume storage to run the entire CI/CD demo including a Jenkins pipeline, demo application deployment and a Traffic Parrot deployment.
+You will need 2Gi free RAM and 2Gi free persistent volume storage to run the entire CI/CD demo including a Jenkins pipeline, demo application deployment and a Traffic Parrot deployment.
 
 ## Install required tools
 1. You will need the `oc` [client tool](https://www.okd.io/download.html#oc-platforms) to issue commands to the cluster
