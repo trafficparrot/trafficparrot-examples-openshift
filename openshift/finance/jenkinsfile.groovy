@@ -20,7 +20,7 @@ pipeline {
                             echo "Using project: ${openshift.project()}"
                             echo "Using demoId: ${demoId}"
                             echo "Using trafficParrotId: ${trafficParrotId}"
-                            echo "Using trafficParrotMappingsId: ${trafficParrotMappingsId}"
+                            echo "Using trafficParrotFilesId: ${trafficParrotFilesId}"
                         }
                     }
                 }
