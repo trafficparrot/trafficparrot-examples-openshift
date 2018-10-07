@@ -78,8 +78,9 @@
                 "name": "${APPLICATION_NAME}-init",
                 "image": "alpine/git",
                 "command": [
-                  "git clone https://github.com/trafficparrot/trafficparrot-examples-openshift.git",
-                  "cp -R /git/mappings /git/trafficparrot-files"
+                  "sh",
+                  "-c",
+                  "git clone https://github.com/trafficparrot/trafficparrot-examples-openshift.git && cp -R /git/mappings /git/trafficparrot-files"
                 ],
                 "volumeMounts": [
                   {
