@@ -79,11 +79,11 @@
                 "image": "alpine/git",
                 "command": [
                   "git clone https://github.com/trafficparrot/trafficparrot-examples-openshift.git",
-                  "cp -R /git/mappings /opt/trafficparrot-files"
+                  "cp -R /git/mappings /git/trafficparrot-files"
                 ],
                 "volumeMounts": [
                   {
-                    "mountPath": "/opt/trafficparrot-files",
+                    "mountPath": "/git/trafficparrot-files",
                     "name": "${APPLICATION_NAME}-files"
                   }
                 ]
