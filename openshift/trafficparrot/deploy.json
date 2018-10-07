@@ -85,6 +85,10 @@
                   {
                     "mountPath": "/git/trafficparrot-files",
                     "name": "${APPLICATION_NAME}-files"
+                  },
+                  {
+                    "mountPath": "/git",
+                    "name": "${APPLICATION_NAME}-init"
                   }
                 ]
               }
@@ -151,6 +155,10 @@
                 "persistentVolumeClaim": {
                   "claimName": "${APPLICATION_NAME}-files"
                 }
+              },
+              {
+                "name": "${APPLICATION_NAME}-init",
+                "emptyDir": {}
               }
             ]
           }
