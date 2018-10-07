@@ -80,7 +80,7 @@
                 "command": [
                   "sh",
                   "-c",
-                  "git clone https://github.com/trafficparrot/trafficparrot-examples-openshift.git && cp -R /git/mappings /git/trafficparrot-files"
+                  "git clone https://github.com/trafficparrot/trafficparrot-examples-openshift.git /git/checkout && cp -R /git/checkout/mappings /git/trafficparrot-files"
                 ],
                 "volumeMounts": [
                   {
