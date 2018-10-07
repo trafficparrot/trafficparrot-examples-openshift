@@ -86,6 +86,7 @@
                     "mountPath": "/opt/trafficparrot-files",
                     "name": "${APPLICATION_NAME}-files"
                   }
+                ]
               }
             ],
             "containers": [
