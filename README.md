@@ -1,5 +1,9 @@
-# Using Traffic Parrot with OpenShift
-These examples will show you how to use Traffic Parrot in an [OpenShift](https://www.openshift.com/) environment.
+# Traffic Parrot service virtualization, API mocking and API simulation with Openshift
+
+This is an example of how to deploy and use 
+a [service virtualization, API mocking and API simulation tool Traffic Parrot](https://trafficparrot.com) with Docker and Openshift.
+
+Follow the examples below to use Traffic Parrot in an [OpenShift](https://www.openshift.com/) environment.
 
 ## Provision an OpenShift cluster
 There are a number of ways you can do this, for example:
