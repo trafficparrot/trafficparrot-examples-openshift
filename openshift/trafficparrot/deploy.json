@@ -175,6 +175,12 @@
       "spec": {
         "ports": [
           {
+            "name": "ui",
+            "protocol": "TCP",
+            "port": 18080,
+            "targetPort": 18080
+          },
+          {
             "name": "http",
             "protocol": "TCP",
             "port": 18081,
@@ -189,6 +195,25 @@
         ],
         "selector": {
           "deploymentConfig": "${APPLICATION_NAME}"
+        }
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${APPLICATION_NAME}-ui",
+        "annotations": {
+          "description": "Route for application's UI"
+        }
+      },
+      "spec": {
+        "port": {
+          "targetPort": 18080
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${APPLICATION_NAME}"
         }
       }
     },
