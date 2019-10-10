@@ -20,6 +20,7 @@ RUN chgrp -R 0 /opt/trafficparrot && chmod -R g=u /opt/trafficparrot
 # You can override properties that appear in trafficparrot.properties here as key=value arguments
 WORKDIR /opt/trafficparrot
 
+# Persistent volume will be mounted on /opt/trafficparrot-files
 RUN mkdir /opt/trafficparrot-files
 
 CMD [ \
