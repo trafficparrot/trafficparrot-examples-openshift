@@ -9,6 +9,7 @@ Follow the examples below to use Traffic Parrot in an [OpenShift 3](https://docs
 * OpenShift 3 is now in [end of life](https://access.redhat.com/support/policy/updates/openshift_noncurrent#hist_dates) phase in favour of OpenShift 4
 * OpenShift 3 Online is replaced by [OpenShift 4 cloud services](https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing)
 * Minishift for OpenShift 3 is replaced by [OpenShift 4 Local](https://developers.redhat.com/products/openshift-local/overview)
+* OpenShift Origin open source edition is replaced by [Origin Key Distribution 4](https://github.com/okd-project/okd)
 * This example is still broadly applicable to OpenShift 4, but there may be slight differences in e.g. the YAML templates, permissions and `oc` commands that you will run into
 * If you are using OpenShift 4, please [contact us](https://trafficparrot.com/contact.html?utm_source=trafficparrot-examples-openshift) and we will help you to get started with an example we have validated in OpenShift 4
 
