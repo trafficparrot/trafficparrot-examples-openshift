@@ -5,14 +5,14 @@ a [service virtualization, API mocking and API simulation tool Traffic Parrot](h
 
 Follow the examples below to use Traffic Parrot in an [OpenShift 3](https://docs.openshift.com/container-platform/3.11/welcome/index.html) environment.
 
-## Notes
+## NOTE: OpenShift 3 is now end of life
 * OpenShift 3 is now in [end of life](https://access.redhat.com/support/policy/updates/openshift_noncurrent#hist_dates) phase in favour of OpenShift 4
 * OpenShift 3 Online is replaced by [OpenShift 4 cloud services](https://www.redhat.com/en/technologies/cloud-computing/openshift/pricing)
 * Minishift for OpenShift 3 is replaced by [OpenShift 4 Local](https://developers.redhat.com/products/openshift-local/overview)
 * This example is still broadly applicable to OpenShift 4, but there may be slight differences in e.g. the YAML templates, permissions and `oc` commands that you will run into
 * If you are using OpenShift 4, please [contact us](https://trafficparrot.com/contact.html?utm_source=trafficparrot-examples-openshift) and we will help you to get started with an example we have validated in OpenShift 4
 
-## Provision an OpenShift cluster
+## Provision an OpenShift 3 cluster
 There are a number of ways you can do this, for example:
 1. Locally using [Minishift](https://github.com/minishift/minishift)
 1. [OpenShift Origin](https://github.com/openshift/origin) open source edition hosted in [AWS](https://sysdig.com/blog/deploy-openshift-aws/)
@@ -43,7 +43,7 @@ And login to the console:
 oc login https://api.<instance>.openshift.com --token=<token>
 ```
 
-### Minishift
+### Minishift for OpenShift 3
 You can use the following commands to log in with the default system user:
 ```
 oc login
