@@ -1,9 +1,14 @@
-# Traffic Parrot service virtualization, API mocking and API simulation with Openshift
+# Traffic Parrot service virtualization, API mocking and API simulation with OpenShift 3
 
 This is an example of how to deploy and use 
-a [service virtualization, API mocking and API simulation tool Traffic Parrot](https://trafficparrot.com) with Docker and Openshift.
+a [service virtualization, API mocking and API simulation tool Traffic Parrot](https://trafficparrot.com?utm_source=trafficparrot-examples-openshift) with Docker and Openshift 3.
 
-Follow the examples below to use Traffic Parrot in an [OpenShift](https://www.openshift.com/) environment.
+Follow the examples below to use Traffic Parrot in an [OpenShift 3](https://docs.openshift.com/container-platform/3.11/welcome/index.html) environment.
+
+## Notes
+* OpenShift 3 is now in [end of life](https://access.redhat.com/support/policy/updates/openshift_noncurrent#hist_dates) phase in favour of OpenShift 4
+* This example is still broadly applicable to OpenShift 4, but there may be slight differences in e.g. the YAML templates, permissions and `oc` commands that you will run into
+* If you are using OpenShift 4, please [contact us](https://trafficparrot.com/contact.html?utm_source=trafficparrot-examples-openshift) and we will help you to get started with an example we have validated in OpenShift 4
 
 ## Provision an OpenShift cluster
 There are a number of ways you can do this, for example:
@@ -20,7 +25,7 @@ You will need 2Gi free RAM and 2Gi free persistent volume storage to run the ent
 1. You will need the `oc` [client tool](https://www.okd.io/download.html#oc-platforms) to issue commands to the cluster
 1. You will need [Docker](https://docs.docker.com/install/#supported-platforms) to be able to build and push custom Docker images to the registry
 
-## Log in to the OpenShift cluster
+## Log in to the OpenShift 3 cluster
 
 ### OpenShift Online
 Find your login by clicking on "Command Line Tools in the web console:
@@ -69,7 +74,7 @@ docker login -u developer -p $(oc whoami -t) ${CLUSTER_REGISTRY}
 We build the image locally and tag it ready to be used in the cluster registry.
 
 Note that you must set build arguments:
-1. `TRAFFIC_PARROT_ZIP` is a HTTP location or a local file location. You can [download a trial copy](https://trafficparrot.com/download.html?src=trafficparrot-examples-openshift).
+1. `TRAFFIC_PARROT_ZIP` is a HTTP location or a local file location. You can [download a trial copy](https://trafficparrot.com/download.html?utm_source=trafficparrot-examples-openshift).
 1. `ACCEPT_LICENSE` should be set to `true` if you accept the terms of the [LICENSE](LICENSE)
 
 ```
@@ -87,7 +92,7 @@ docker push ${CLUSTER_REGISTRY}/trafficparrot-test/trafficparrot-image
 ```
 
 ### Install Jenkins
-You will need Jenkins in the OpenShift cluster to provide CI/CD support for the pipeline.
+You will need Jenkins in the OpenShift 3 cluster to provide CI/CD support for the pipeline.
 
 The easiest way to do this is via the web console catalog:
 
@@ -136,12 +141,12 @@ You can push the pipeline forwards by clicking on ![Alt text](images/openshift-p
 ### What just happened?
 Behind the scenes, we just demonstrated that the demo finance application was able to communicate with Traffic Parrot inside the cluster.
 
-Traffic Parrot was configured by importing an OpenAPI definition [markit.yaml](openshift/finance/markit.yaml) using the [HTTP Management API](https://trafficparrot.com/documentation/4.1.x/openapi/index.html).
+Traffic Parrot was configured by importing an OpenAPI definition [markit.yaml](openshift/finance/markit.yaml) using the [HTTP Management API](https://trafficparrot.com/documentation/?redirectToLatest=true&path=/openapi/index.html).
 
 Have a look at the configuration files in this project to see how it is done. The key files are:
 * [finance/pipeline.yaml](openshift/finance/pipeline.yaml) is the pipeline `BuildConfig`
 * [finance/jenkinsfile.groovy](openshift/finance/jenkinsfile.groovy) is the Jenkins pipeline configuration
-* [finance/build.json](openshift/finance/build.json) is the `BuildConfig` used to build the [finance application](https://github.com/wojciechbulaty/examples/tree/master/finance-application)
+* [finance/build.json](openshift/finance/build.json) is the `BuildConfig` used to build the [finance application](https://github.com/trafficparrot/trafficparrot-demo-applications/tree/master/finance-application)
 * [finance/deploy.json](openshift/finance/deploy.json) is the `Template` used to deploy the finance application
 * [trafficparrot/Dockerfile](openshift/trafficparrot/Dockerfile) is the `Dockerfile` used to build the Traffic Parrot image
 * [trafficparrot/deploy.json](openshift/trafficparrot/deploy.json) is the `Template` used to deploy Traffic Parrot
